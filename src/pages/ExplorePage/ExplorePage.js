@@ -55,7 +55,7 @@ class ExplorePage extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navbar menuItems={[["Home", false, "/"], ["Explore", true, "/explore"], ["Create", false, "/create"]]}/>
+				<Navbar menuItems={[["Home", false, "/"], ["Explore", true, "/explore"], ["Create", false, "/create/pickcontent"]]}/>
 				<div className="container-fluid">
 					<Galery />
 				</div>
