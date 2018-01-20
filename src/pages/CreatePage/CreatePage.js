@@ -30,7 +30,7 @@ class CreatePage extends React.Component {
 		return (
 			<div>
 				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create"]]}/>
-				<div className="container">
+				<div className="container createPage">
 					<h1 className="display-4">Style creator:</h1>
 					<p className="lead">
 						Upload the image you want to style.
