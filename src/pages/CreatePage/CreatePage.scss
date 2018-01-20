@@ -1,0 +1,32 @@
+.dragDiv {
+    width: 100%;
+    height: 50px;
+    border: 2px dashed #bbb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font: 20pt bold 'Vollkorn';
+    color: #bbb;
+}
+
+.selectbox{
+    padding:15px;
+    height: 250px
+}
+
+.generateBtn{
+    padding:15px;
+    text-align:center;
+    height: 70px;
+
+}
+.generateBtn button{
+    height: 60px;
+}
+
+.card{
+    max-height: 200px;
+    width: fit-content;
+}
