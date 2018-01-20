@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "flickr-sdk": "3.5.0",
+    "jquery": "^3.3.1",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
+    "react-animations": "1.0.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
-    "redux": "^3.7.2",
-    "react-animations": "1.0.0",
-    "flickr-sdk": "3.5.0"
+    "redux": "^3.7.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

@@ -59,7 +59,7 @@ class PickStylePage extends React.Component {
 					
 					<div className="row">	
 						<div className="col generateBtn">
-							<Link to="/create/pickstyle" className="btn btn-success" role="button" id="goto-login">Generate Design</Link>
+							<Link to="/create/preview" className="btn btn-success" role="button" id="goto-login">Generate Design</Link>
 						</div>
 					</div>
 					
