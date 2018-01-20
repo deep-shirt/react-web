@@ -28,3 +28,10 @@
 
 .createPage .hide {
   display: none; }
+
+.createPage .galery {
+  height: 370px;
+  overflow-y: scroll; }
+
+.createPage .galery .card-img-top:hover {
+  box-shadow: 0px 0px 6px 1px #323a7f; }
