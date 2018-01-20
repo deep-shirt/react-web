@@ -1,30 +1,18 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
-import './CreatePage.css'
+import Navbar from '../../../components/Navbar/Navbar';
+import Footer from '../../../components/Footer/Footer';
+import './PickStylePage.css'
 import { fadeIn } from 'react-animations'
 
-class CreatePage extends React.Component {
+class PickStylePage extends React.Component {
 	constructor(props) {
 		super(props);		
-		this.pickcontent = this.pickcontent.bind(this);
 		this.pickstyle = this.pickstyle.bind(this);
-		this.buttonClicked = this.buttonClicked.bind(this);
 		this.state = {
-			contentImage : undefined,
-			styleImage : undefined,
+			styleImage : "https://dummyimage.com/800x800/ccc/fff.png",
 		}
 	}	
 
-	buttonClicked(e){
-		var contentPickerElement = this.refs.contentPicker;
-	}	
-
-	pickcontent(image){
-		this.setState({
-			contentImage : image
-		})
-	}
 
 	pickstyle(image){
 		this.setState({
@@ -35,37 +23,10 @@ class CreatePage extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create"]]}/>
+				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>
 				<div className="container createPage">
 					<h1 className="display-4">Style creator:</h1>
-					<div className="contentPicker wow slideInRight" ref="contentPicker">
-						<p className="lead">
-							Upload the image you want to style.
-						</p>
-						<div className="row selectbox">				
-							<div className="col-sm">
-								<ul className="nav nav-tabs" role="tablist">
-								<li className="nav-item">
-									<a className="nav-link active" data-toggle="tab" href="#home" role="tab">Upload own picture</a>
-								</li>
-								<li className="nav-item">
-									<a className="nav-link" data-toggle="tab" href="#profile" role="tab">Select Flickr image</a>
-								</li>
-								</ul>
-								<div className="tab-content">
-									<div className="tab-pane active" id="home" role="tabpanel">
-										<ImageUpload callback={this.pickcontent}></ImageUpload>
-									</div>
-									<div className="tab-pane" id="profile" role="tabpanel">Flickr
-									</div>
-								</div>		
-							</div>	
-							<div className="col">
-								Content image:
-								<ImageThumbnail imagefile={this.state.contentImage}></ImageThumbnail>
-							</div>
-						</div>
-					</div>
+					
 					<div className="stylePicker wow slideInRight">
 						<p className="lead">
 							Select the style 
@@ -99,6 +60,7 @@ class CreatePage extends React.Component {
 					
 					<div className="row">	
 						<div className="col generateBtn">
+		
 						<button type="button" class="btn btn-success"  onClick={this.buttonClicked}>Generate Shirt Style</button>
 						</div>
 					</div>
@@ -158,4 +120,4 @@ function ImageThumbnail(props) {
 }
 
 
-export default CreatePage;
+export default PickStylePage;

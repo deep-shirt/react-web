@@ -31,7 +31,7 @@ class RegisterPage extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", false, "/create"]]}/>
+				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", false, "/create/pickcontent"]]}/>
 				<div className="container">
 					<div className="row align-items-center">
 						<div className="col-s-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 align-self-center">

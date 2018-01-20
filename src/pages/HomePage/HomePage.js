@@ -8,7 +8,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navbar menuItems={[["Home", true, "/"], ["Explore", false, "/explore"], ["Create", false, "/create"]]}/>
+				<Navbar menuItems={[["Home", true, "/"], ["Explore", false, "/explore"], ["Create", false, "/create/pickcontent"]]}/>
 				<Footer />
 			</div>
 		);
