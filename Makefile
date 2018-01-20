@@ -1,3 +1,5 @@
+.PHONY: all build run
+
 all: build
 
 build:
