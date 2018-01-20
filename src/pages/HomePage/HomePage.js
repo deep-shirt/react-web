@@ -56,7 +56,8 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navbar menuItems={[["Home", true, "/"], ["Explore", false, "/explore"], ["Create", false, "/create"]]}/>
+				<Navbar menuItems={[["Home", true, "/"], ["Explore", false, "/explore"], ["Create", false, "/create/pickcontent"]]}/>
+
 				<div className="container-fluid">
 					<div className="row">
 						<div className="jumbotron col-12 col-lg-10 offset-lg-1 wow fadeInRight" id="time-container">

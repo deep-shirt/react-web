@@ -13,7 +13,7 @@
 
 .createPage .selectbox{
     padding:15px;
-    height: 250px
+    height: 500px;
 }
 
 .createPage .generateBtn{
@@ -22,11 +22,16 @@
     height: 70px;
 
 }
-.createPage .generateBtn button{
+.createPage .generateBtn .btn{
     height: 60px;
+    text-align: center;
 }
 
 .createPage .card{
     max-height: 200px;
     width: fit-content;
+}
+
+.createPage .hide{
+   display: none;
 }
