@@ -38,7 +38,7 @@ class Navbar extends React.Component {
 	render() {
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
-				<a href="/" className="navbar-brand">ClotheIT</a>
+				<a href="/" className="navbar-brand">DeepShirt</a>
 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
 					<span className="navbar-toggler-icon"></span>
 				</button>
@@ -46,8 +46,8 @@ class Navbar extends React.Component {
 				<div className="collapse navbar-collapse" id="navbar">
 					<Menu menuItems={this.props.menuItems}/>
 					<div className="my-2 my-lg-2">
-						<Link to="/login" className="btn btn-outline-success my-2 my-sm-0" role="button">Login</Link>
-						<Link to="/register" className="btn btn-outline-primary my-2 my-sm-0" role="button">Sign Up</Link>
+						<Link to="/login" className="btn btn-outline-success my-2 my-sm-0" role="button" id="goto-login">Login</Link>
+						<Link to="/register" className="btn btn-outline-primary my-2 my-sm-0" role="button" id="goto-register">Sign Up</Link>
 					</div>
 				</div>
 			</nav>
