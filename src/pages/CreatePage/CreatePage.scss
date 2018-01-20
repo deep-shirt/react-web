@@ -19,10 +19,14 @@
 .generateBtn{
     padding:15px;
     text-align:center;
+    height: 70px;
+
+}
+.generateBtn button{
+    height: 60px;
 }
 
 .card{
     max-height: 200px;
     width: fit-content;
-
 }
