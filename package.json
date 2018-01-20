@@ -13,13 +13,8 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
-<<<<<<< HEAD
     "redux": "^3.7.2",
-    "react-animations": "1.0.0",
     "flickr-sdk": "3.5.0"
-=======
-    "redux": "^3.7.2"
->>>>>>> e96ff638d0b61858bd5a14a1fc82f32237ec82a9
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
