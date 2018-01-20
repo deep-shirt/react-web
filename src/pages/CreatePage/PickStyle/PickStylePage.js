@@ -13,7 +13,6 @@ class PickStylePage extends React.Component {
 		}
 	}	
 
-
 	pickstyle(image){
 		this.setState({
 			styleImage : image
@@ -46,8 +45,7 @@ class PickStylePage extends React.Component {
 									
 									</div>
 									<div className="tab-pane" id="user-style" role="tabpanel">
-									
-										<ImageUpload callback={this.pickstyle}></ImageUpload>
+										<FlickerPicker callback={this.pickstyle}></FlickerPicker>
 									</div>
 								</div>		
 							</div>	
@@ -64,8 +62,7 @@ class PickStylePage extends React.Component {
 						<button type="button" class="btn btn-success"  onClick={this.buttonClicked}>Generate Shirt Style</button>
 						</div>
 					</div>
-				</div>
-				
+				</div>			
 				
 				<Footer />
 			</div>
@@ -73,7 +70,7 @@ class PickStylePage extends React.Component {
 	}
 }
 
-class ImageUpload extends React.Component {
+class FlickerPicker extends React.Component {
 	constructor(props) {
 		super(props)
 		this.pickfile = this.pickfile.bind(this);
@@ -94,12 +91,12 @@ class ImageUpload extends React.Component {
 	render() {
 		return (
 			<div>
-				<form>
-					<div className="form-group">					
-						<div className="dragDiv">Drag file here</div>
-						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
-					</div>
-				</form>
+				<div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <span class="input-group-text" id="basic-addon1">Search</span>
+				</div>
+				<input type="text" class="form-control" placeholder="Photo tack" aria-label="Username" aria-describedby="basic-addon1"></input>
+			  </div>
 			</div>
 		)
 	}
