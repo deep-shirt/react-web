@@ -17,6 +17,7 @@ class PickStylePage extends React.Component {
 		this.setState({
 			styleImage : imageElement.target.src
 		})
+		window.localStorage.setItem('styleImage', imageElement.target.src);
 	}
 	
 	render() {

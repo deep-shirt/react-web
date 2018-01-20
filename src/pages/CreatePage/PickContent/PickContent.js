@@ -20,6 +20,7 @@ class PickContent extends React.Component {
 		this.setState({
 			contentImage : image
 		})
+		window.localStorage.setItem('contentImage', image);
 	}
 
 	render() {
