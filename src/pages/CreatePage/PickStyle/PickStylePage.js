@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../../../components/Navbar/Navbar';
+import {Navbar,Link} from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import './PickStylePage.css'
 import { fadeIn } from 'react-animations'
@@ -13,9 +13,9 @@ class PickStylePage extends React.Component {
 		}
 	}	
 
-	pickstyle(image){
+	pickstyle(imageElement){
 		this.setState({
-			styleImage : image
+			styleImage : imageElement.target.src
 		})
 	}
 	
@@ -42,10 +42,10 @@ class PickStylePage extends React.Component {
 								</ul>
 								<div className="tab-content">
 									<div className="tab-pane active" id="pre-style" role="tabpanel">
-									
+										<Galery callback={this.pickstyle}></Galery>
 									</div>
 									<div className="tab-pane" id="user-style" role="tabpanel">
-										<FlickerPicker callback={this.pickstyle}></FlickerPicker>
+										
 									</div>
 								</div>		
 							</div>	
@@ -58,10 +58,10 @@ class PickStylePage extends React.Component {
 					
 					<div className="row">	
 						<div className="col generateBtn">
-		
-						<button type="button" class="btn btn-success"  onClick={this.buttonClicked}>Generate Shirt Style</button>
+							<Link to="/create/pickstyle" className="btn btn-success" role="button" id="goto-login">Generate Design</Link>
 						</div>
 					</div>
+					
 				</div>			
 				
 				<Footer />
@@ -70,36 +70,34 @@ class PickStylePage extends React.Component {
 	}
 }
 
-class FlickerPicker extends React.Component {
-	constructor(props) {
-		super(props)
-		this.pickfile = this.pickfile.bind(this);
-	}
-	pickfile(e,callback) {
-		var files =e.target.files; 
-		if(files.length > 0){
-			var reader = new FileReader();
-			var self = this;
-			// Closure to capture the file information.
-			reader.onload = function(fileE) {
-				self.props.callback(fileE.target.result)
-			}
-			// Read in the image file as a data URL.
-			reader.readAsDataURL(files[0]);
-		}
-	}
-	render() {
-		return (
-			<div>
-				<div class="input-group mb-3">
-				<div class="input-group-prepend">
-				  <span class="input-group-text" id="basic-addon1">Search</span>
-				</div>
-				<input type="text" class="form-control" placeholder="Photo tack" aria-label="Username" aria-describedby="basic-addon1"></input>
-			  </div>
+const GaleryItem = (props) => {
+	return (
+		<div className="col-12 col-md-4">
+			<div className="card wow fadeIn" data-wow-delay={props.index % 3 / 5 + 0.2 + "s"}>
+				<img src={props.url} onClick={props.callback} alt="" className="card-img-top"/>
 			</div>
-		)
+		</div>
+	);
+}
+
+const Galery = (props) => {
+	const  urls = [
+		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/la_muse.jpg",
+		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/rain_princess.jpg",
+		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/the_scream.jpg",
+		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/the_shipwreck_of_the_minotaur.jpg",
+		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/udnie.jpg",
+		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/wave.jpg"
+	];
+	const itemList = [];
+
+	for (let i = 0; i < urls.length; i++) {
+		itemList.push(<GaleryItem index={i} key={urls[i]}  callback={props.callback} url={urls[i]}/>);
 	}
+
+	return (
+		<div className="row galery">{itemList}</div>
+	);
 }
 
 
@@ -108,13 +106,12 @@ function ImageThumbnail(props) {
 		return (
 			<div>
 				<div className="card">
-					<img height="200px" className="card-img-top" src={props.imagefile} alt="Card image cap"></img>
+					<img className="card-img-top thumbnailIMG" src={props.imagefile} alt="Card image cap"></img>
 				</div>
 			</div>
 		);
 	}
 	else return (<div></div>);
 }
-
 
 export default PickStylePage;
