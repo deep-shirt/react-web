@@ -21,7 +21,6 @@ class App extends React.Component {
     return (
     	<Router>
 			<div>
-<<<<<<< HEAD
 				<Route exact path="/" component={HomePage}/>
 				<Route exact path="/explore" component={ExplorePage}/>
 				<Route exact path="/create/pickcontent" component={PickContent}/>
@@ -30,7 +29,6 @@ class App extends React.Component {
 				<Route exact path="/login" component={LoginPage}/>
 				<Route exact path="/register" component={RegisterPage}/>
 				<Route exact path="/designs/:id" component={DetailPage}/>
-=======
 				
 				<Route exact path={routes.EXPLOREPAGE} component={ExplorePage}/>
 				<Route exact path={routes.PICKCONTENTPAGE} component={PickContent}/>
@@ -41,12 +39,9 @@ class App extends React.Component {
 
 
 				<Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetPage />} />
-      			<Route exact path={routes.ACCOUNTPAGE} component={() => <AccountPage />} />
-			    <Route exact path={routes.HOMEPAGE} component={() => <HomePage />} />
-			    <Route exact path={routes.HOME} component={() => <Home />} />
-
-
->>>>>>> auth2
+   			<Route exact path={routes.ACCOUNTPAGE} component={() => <AccountPage />} />
+			  <Route exact path={routes.HOMEPAGE} component={() => <HomePage />} />
+			  <Route exact path={routes.HOME} component={() => <Home />} />
 			</div>
 		</Router>
     );
