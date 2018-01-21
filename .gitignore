@@ -22,3 +22,5 @@ yarn-error.log*
 
 # lint
 .eslintrc
+
+/src/*.css
