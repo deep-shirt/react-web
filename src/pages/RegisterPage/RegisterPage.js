@@ -1,50 +1,130 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
-import './RegisterPage.css'
+import React, { Component } from 'react';
+import {
+  Link,
+  withRouter,
+} from 'react-router-dom';
 
-function RegisterForm() {
-	return (
-		<form>
-			<h2>Join awesomeness</h2>
-			<div className="form-group">
-				<label htmlFor="register-input-email">Email</label>
-				<input type="email" className="form-control form-control-lg" id="register-input-email" placeholder="john@lennon.org" />
-			</div>
-			<div className="form-group">
-				<label htmlFor="register-input-name">Username</label>
-				<input type="text" className="form-control form-control-lg" id="register-input-name" placeholder="JLennon" />
-			</div>
-			<div className="form-group">
-				<label htmlFor="register-input-pwd">Password</label>
-				<input type="password" className="form-control form-control-lg" id="register-input-pwd" placeholder="********" />
-			</div>
-			<button className="btn btn-lg btn-block btn-primary">Sign Up</button>
-			<p>Already have an account? <Link to="/login">Login</Link></p>
-		</form>
-	);
+import { auth, db } from '../../firebase';
+import * as routes from '../../constants/routes';
+
+const SignUpPage = ({ history }) =>
+  <div>
+    <h1>SignUp</h1>
+    <SignUpForm history={history} />
+  </div>
+
+const updateByPropertyName = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
+
+const INITIAL_STATE = {
+  username: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  error: null,
+};
+
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { ...INITIAL_STATE };
+  }
+
+  onSubmit = (event) => {
+    const {
+      username,
+      email,
+      passwordOne,
+    } = this.state;
+
+    const {
+      history,
+    } = this.props;
+
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+
+        // Create a user in your own accessible Firebase Database too
+        db.doCreateUser(authUser.uid, username, email)
+          .then(() => {
+            this.setState(() => ({ ...INITIAL_STATE }));
+            history.push(routes.HOMEPAGE);
+          })
+          .catch(error => {
+            this.setState(updateByPropertyName('error', error));
+          });
+
+      })
+      .catch(error => {
+        this.setState(updateByPropertyName('error', error));
+      });
+
+    event.preventDefault();
+  }
+
+  render() {
+    const {
+      username,
+      email,
+      passwordOne,
+      passwordTwo,
+      error,
+    } = this.state;
+
+    const isInvalid =
+      passwordOne !== passwordTwo ||
+      passwordOne === '' ||
+      username === '' ||
+      email === '';
+
+    return (
+      <form onSubmit={this.onSubmit}>
+        <input
+          value={username}
+          onChange={event => this.setState(updateByPropertyName('username', event.target.value))}
+          type="text"
+          placeholder="Full Name"
+        />
+        <input
+          value={email}
+          onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          value={passwordOne}
+          onChange={event => this.setState(updateByPropertyName('passwordOne', event.target.value))}
+          type="password"
+          placeholder="Password"
+        />
+        <input
+          value={passwordTwo}
+          onChange={event => this.setState(updateByPropertyName('passwordTwo', event.target.value))}
+          type="password"
+          placeholder="Confirm Password"
+        />
+        <button disabled={isInvalid} type="submit">
+          Sign Up
+        </button>
+
+        { error && <p>{error.message}</p> }
+      </form>
+    );
+  }
 }
 
-class RegisterPage extends React.Component {
+const SignUpLink = () =>
+  <p>
+    Don't have an account?
+    {' '}
+    <Link to={routes.REGISTERPAGE}>Sign Up</Link>
+  </p>
 
-	render() {
-		return (
-			<div>
-				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", false, "/create/pickcontent"]]}/>
-				<div className="container">
-					<div className="row align-items-center">
-						<div className="col-s-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 align-self-center">
-							<div className="jumbotron wow slideInRight" id="register-form-container">
-								<RegisterForm />
-							</div>
-						</div>
-					</div>
-				</div>
-				<Footer />
-			</div>
-		);
-	}
-}
+export default withRouter(SignUpPage);
 
-export default RegisterPage;
+export {
+  SignUpForm,
+  SignUpLink,
+};
