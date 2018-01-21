@@ -271,7 +271,7 @@ class PreviewPage extends React.Component {
 
 			// API call to ML
 			let api_url = "https://deep.deep-shirt.com:8080/fast-style-transfer";
-			let s = '', t = 5000;
+			let s = '', t = 0;
 
 			for (let k in urls) {
 				if (k === style) s = urls[k];
@@ -305,6 +305,7 @@ class PreviewPage extends React.Component {
 				},
 				error: function(error) {
 					console.log(error);
+					console.log("error on " + api_url)
 				}
 			});
 		}
