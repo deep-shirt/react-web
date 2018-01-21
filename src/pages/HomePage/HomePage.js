@@ -15,7 +15,6 @@ const GaleryItem = (props) => {
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
 					<p className="card-text">{props.description}</p>
 					<Link to={props.path} className="card-link">Go to listing</Link>
-					<a href="/cart" className="card-link">Add to cart</a>
 				</div>
 			</div>
 		</div>
