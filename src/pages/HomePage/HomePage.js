@@ -17,7 +17,6 @@ const GaleryItem = (props) => {
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
 					<p className="card-text">{props.description}</p>
 					<Link to={props.path} className="card-link">Go to listing</Link>
-					<a href="/cart" className="card-link">Add to cart</a>
 				</div>
 			</div>
 		</div>
@@ -39,7 +38,7 @@ class Galery extends React.Component {
 
 		var component = this;
 
-		firebase.db.ref("products").limitToLast(6).once("value").then(function(designsRaw) {
+		firebase.db.ref("products").limitToLast(6).orderByKey().once("value").then(function(designsRaw) {
 
 			const itemList = [];
 

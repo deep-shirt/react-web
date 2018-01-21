@@ -78,10 +78,10 @@ class Detail extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="col-6 align-self-center">
+				<div className="col-12 col-lg-6 align-self-center">
         	<Carousel imgs={this.state.imgs} />    
         </div>
-				<div className="col-6">
+				<div className="col-12 col-lg-6">
 
 					<h1 className="col-12 space-b-sm">{this.state.design.name}</h1>
 					<h4 className="col-12 space-b-lg">{this.state.design.description}</h4>
@@ -110,7 +110,7 @@ class Detail extends React.Component {
 					</div>
 
 					<h3 className="text-center">$ {this.state.design.price}</h3>
-					<button className="col-md-4 offset-md-4 btn btn-primary btn-block">Buy</button>
+					<button className="col-md-4 offset-md-4 btn btn-primary btn-block disabled">Store coming soon!</button>
 				</div>
 			</div>
 		);
