@@ -1,6 +1,9 @@
 .PHONY: all build run
 
-all: build
+all: deps build
+
+deps:
+	npm install
 
 build:
 	npm run build
