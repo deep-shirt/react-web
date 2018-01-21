@@ -63,16 +63,16 @@ class PickStylePage extends React.Component {
 								</div>		
 							</div>	
 							<div className="col">
-									<p class="font-weight-bold">Selected Style image:</p>									
+									<p className="font-weight-bold">Selected Style image:</p>									
 									<ImageThumbnail imagefile={this.state.styleImage}></ImageThumbnail>
 							</div>
 						</div>
 					</div>
 					
 					<div className="row float-right">	
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<Link to="/create/pickcontent" type="button" className={"btn btn-primary "} ><span class="oi oi-chevron-left"></span> Pick Main image</Link>
-							<Link to="/create/preview"  type="button"  className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Generate Design <span class="oi oi-chevron-right"></span></Link>
+						<div className="btn-group" role="group" aria-label="Basic example">
+							<Link to="/create/pickcontent" type="button" className={"btn btn-primary "} ><span className="oi oi-chevron-left"></span> Pick Main image</Link>
+							<Link to="/create/preview"  type="button"  className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Generate Design <span className="oi oi-chevron-right"></span></Link>
 						</div>						
 					</div>					
 					

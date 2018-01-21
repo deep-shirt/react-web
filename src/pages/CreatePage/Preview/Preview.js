@@ -90,8 +90,10 @@ class Modal extends React.Component {
 			designUrl: this.props.data.designUrl,
 			contentImage: this.props.data.contentImage,
 			styleImage: this.props.data.styleImage,
-			price:6,
-			name:this.refs.name.value
+			price: (Math.random() * 20 + 15).toFixed(2),
+			name:this.refs.name.value,
+			description:this.refs.desc.value,
+			tags:""
 		});
 	}
 	render(){
@@ -107,10 +109,13 @@ class Modal extends React.Component {
 							</button>
 						</div>
 						<div className="modal-body">
-							<p>Please enter the name of your Style</p>
+							<p>Please enter the name and description of your Style</p>
 							<form>
 								<div className="form-group">
 									<input type="text" ref="name" className="form-control" id="styleName" required placeholder="Name"></input>
+								</div>
+								<div className="form-group">
+									<input type="textarea" ref="desc" className="form-control" id="styleDescription" required placeholder="Tell us something about your creation..."></input>
 								</div>
 							</form>
 						</div>
@@ -142,7 +147,7 @@ class PreviewPage extends React.Component {
 	}
 
 	loadTeeShirts() {
-		let api_key = ["j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh"];
+		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
 		let api_url = "https://api.printful.com/mockup-generator/task?task_key=" + this.state.taskid;
 
 		let comp = this;
@@ -154,7 +159,7 @@ class PreviewPage extends React.Component {
 			    "Authorization": "Basic " + btoa(api_key),
 			},
 			success: function(data) {
-				if (data.code === '200') {
+				if (data.code === 200) {
 					if (data.result.status === "completed") {
 						console.log(data);
 						comp.setState({
@@ -173,7 +178,7 @@ class PreviewPage extends React.Component {
 						});
 
 					} else {
-						window.setTimeout(comp.loadTeeShirts(), 300);
+						window.setTimeout(comp.loadTeeShirts(), 1500);
 					}
 				}
 			},
@@ -215,13 +220,11 @@ class PreviewPage extends React.Component {
 			    "Authorization": "Basic " + btoa(api_key),
 			},
 			success: function(data) {
-				if (data.code === '200') {
+				if (data.code === 200) {
 					comp.setState({
 						taskid: data.result.task_key,
 					});
-					window.setTimeout(comp.loadTeeShirts(), 50);
-
-
+					window.setTimeout(comp.loadTeeShirts(), 150);
 				}
 			},
 			error: function(err) {
@@ -290,9 +293,8 @@ class PreviewPage extends React.Component {
 				<div className="container createPage">
 					<h1 className="display-4">Design preview</h1>
 					<Carousel imagesLoaded={this.state.imagesLoaded} previewImage={this.state.previewImage} previewExtras={this.state.previewExtras} />
-
 					<div className="btns row float-right">
-						<div class="btn-group" role="group" aria-label="Basic example">
+						<div className="btn-group" role="group" aria-label="Basic example">
 							<Link to="/create/pickcontent" type="button" className={"btn btn-danger "} ><span class="oi oi-chevron-left"></span> Generate Design</Link>
 							<button type="button" className={"btn " + (this.state.imagesLoaded ? 'btn-success' :  'btn-secondary disabled')} data-toggle="modal" data-target="#exampleModal"> Save design </button>
 						</div>
