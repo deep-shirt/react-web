@@ -8,14 +8,22 @@ class PickStylePage extends React.Component {
 	constructor(props) {
 		super(props);		
 		this.pickstyle = this.pickstyle.bind(this);
+		var styleImage = window.localStorage.getItem('styleImage')
+		var imageSet = true;
+		if(styleImage == undefined){
+			styleImage = "https://dummyimage.com/800x800/ccc/fff.png";
+			imageSet = false;
+		}
 		this.state = {
-			styleImage : "https://dummyimage.com/800x800/ccc/fff.png",
+			styleImage : styleImage,
+			imageSet:imageSet
 		}
 	}	
 
 	pickstyle(imageElement){
 		this.setState({
-			styleImage : imageElement.target.src
+			styleImage : imageElement.target.src,
+			imageSet: true
 		})
 		window.localStorage.setItem('styleImage', imageElement.target.src);
 	}
@@ -25,7 +33,7 @@ class PickStylePage extends React.Component {
 			<div>
 				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>
 				<div className="container createPage">
-					<h1 className="display-4">Style creator:</h1>
+					<h1 className="display-4">Style Creator</h1>
 					
 					<div className="stylePicker wow slideInRight">
 						<p className="lead">
@@ -51,18 +59,18 @@ class PickStylePage extends React.Component {
 								</div>		
 							</div>	
 							<div className="col">
-									Style image:
+									<p class="font-weight-bold">Selected Style image:</p>									
 									<ImageThumbnail imagefile={this.state.styleImage}></ImageThumbnail>
 							</div>
 						</div>
 					</div>
 					
-					<div className="row">	
-						<div className="col generateBtn">
-							<Link to="/create/pickstyle" className="btn btn-success" role="button" id="goto-login">Generate Design</Link>
-						</div>
-					</div>
-					
+					<div className="row float-right">	
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<Link to="/create/pickcontent" type="button" className={"btn btn-primary "} ><span class="oi oi-chevron-left"></span> Pick Main image</Link>
+							<Link to="/create/pickstyle"  type="button" className="btn btn-success">Generate Design <span class="oi oi-chevron-right"></span></Link>
+						</div>						
+					</div>					
 				</div>			
 				
 				<Footer />
