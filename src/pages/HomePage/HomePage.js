@@ -99,7 +99,7 @@ class HomePage extends React.Component {
 							<h1>HOW DOES</h1>
 							<h1>IT WORK?</h1>
 							<div className="embed-responsive embed-responsive-16by9">
-								<iframe title="How does Deep Shirt Solutions work?" className="embed-responsive-item" src="https://www.youtube.com/embed/cHcVU5cGUNE?rel=0"></iframe>
+								<iframe title="How does Deep Shirt Solutions work?" className="embed-responsive-item" src="https://www.youtube.com/embed/7kvrwnMMZWw?rel=0"></iframe>
 							</div>
 
 						</div>
