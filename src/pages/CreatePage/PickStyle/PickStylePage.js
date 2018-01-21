@@ -73,7 +73,7 @@ class PickStylePage extends React.Component {
 					<div className="row float-right">	
 						<div class="btn-group" role="group" aria-label="Basic example">
 							<Link to="/create/pickcontent" type="button" className={"btn btn-primary "} ><span class="oi oi-chevron-left"></span> Pick Main image</Link>
-							<Link to="/create/preview"  type="button" className="btn btn-success">Generate Design <span class="oi oi-chevron-right"></span></Link>
+							<Link to="/create/preview"  type="button"  className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Generate Design <span class="oi oi-chevron-right"></span></Link>
 						</div>						
 					</div>					
 					
