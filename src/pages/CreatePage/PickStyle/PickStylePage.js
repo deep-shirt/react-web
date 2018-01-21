@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Link } from '../../../components/Navbar/Navbar';
 import './PickStylePage.css';
-import firebase from '../../../firebase';
+import * as firebase from 'firebase';
 
 class PickStylePage extends React.Component {
 

@@ -17,40 +17,40 @@ const Carousel = (props) => {
 
 	if (props.imagesLoaded) {
 		return (
-			<div class="row">
-				<div class="col align-self-center">
+			<div className="row">
+				<div className="col align-self-center">
 					<div id="preview-carousel" className="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#preview-carousel" data-slide-to="0" class="active"></li>
+						<ol className="carousel-indicators">
+							<li data-target="#preview-carousel" data-slide-to="0" className="active"></li>
 							<li data-target="#preview-carousel" data-slide-to="1"></li>
 							<li data-target="#preview-carousel" data-slide-to="2"></li>
 							<li data-target="#preview-carousel" data-slide-to="3"></li>
 							<li data-target="#preview-carousel" data-slide-to="4"></li>
 						</ol>
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img class="d-block image" src={props.previewImage} alt="Close-up style" />
+						<div className="carousel-inner">
+							<div className="carousel-item active">
+								<img className="d-block image" src={props.previewImage} alt="Close-up style" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[0]} alt="Human wearing your style, 1" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[0]} alt="Human wearing your style, 1" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[1]} alt="Human wearing your style, 2" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[1]} alt="Human wearing your style, 2" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[2]} alt="Human wearing your style, 3" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[2]} alt="Human wearing your style, 3" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[3]} alt="Fith slide" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[3]} alt="Fith slide" />
 							</div>
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
+						<a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+							<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span className="sr-only">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
+						<a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+							<span className="carousel-control-next-icon" aria-hidden="true"></span>
+							<span className="sr-only">Next</span>
 						</a>
 					</div>
 				</div>
@@ -204,10 +204,14 @@ class PreviewPage extends React.Component {
 	}
 
 	requestTeeShirts() {
+		let ids = [[257, 8852], [260, 8880]]; // men1, women1, 
+
+		let g = Math.floor(Math.random() * ids.length);
+
 		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
-		let api_url = "https://api.printful.com/mockup-generator/create-task/257";
+		let api_url = "https://api.printful.com/mockup-generator/create-task/" + ids[g][0];
 		let api_body = {
-			"variant_ids": [8852],
+			"variant_ids": [ids[g][1]],
 			"format": "jpg",
 			"files": [{
 				"placement": "default",
@@ -275,7 +279,7 @@ class PreviewPage extends React.Component {
 			if (s === ''){
 				api_url = "http://35.197.98.218:8080/neural-art";
 				s = style;
-				t = 60000 * 3;
+				t = 0;
 			}
 
 			let comp = this;

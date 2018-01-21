@@ -107,9 +107,9 @@ class HomePage extends React.Component {
 
 				</div>
 
-				<blockquote class="homequote blockquote text-center">
-					<h3 class="mb-0">&raquo;This world is but a canvas to our imagination.&laquo;</h3>
-					<footer class="blockquote-footer">Henry David Thoreau</footer>
+				<blockquote className="homequote blockquote text-center">
+					<h3 className="mb-0">&raquo;This world is but a canvas to our imagination.&laquo;</h3>
+					<footer className="blockquote-footer">Henry David Thoreau</footer>
 				</blockquote>
 
 			</div>
