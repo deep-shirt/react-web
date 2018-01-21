@@ -1,49 +1,79 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import firebase from '../../firebase';
 import './DetailPage.css'
 
-const DetailPage = ({match}) => {
-	const design = {
-		id: "t_design_" + match.params.id,
-		title: "Design " + match.params.id,
-		price: (Math.random() * 50).toFixed(2),
-		description: "This is the description text for design " + match.params.id + ".",
-		imgs: [
-			"/img/" + match.params.id + "/img1",
-			"/img/" + match.params.id + "/img2",
-			"/img/" + match.params.id + "/img3"
-		]
+class Detail extends React.Component {
+
+	constructor(props) {
+
+		super(props);
+		this.state = {
+			design: {},
+		};
+		this.getDesign();
 	}
+
+	getDesign() {
+
+		var component = this;
+
+		firebase.db.ref("products/" + this.props.detailID).once("value").then(function(item) {
+			component.setState({design: item.val()});
+		});
+	}
+
+	render() {
+		return (
+			<div className="row">
+				<div className="col-6">
+					<img src={this.state.design.designUrl} alt={"Image for " + this.state.design.name} className="col"/>
+				</div>
+				<div className="col-6">
+
+					<h1 className="col-12 space-b-sm">{this.state.design.name}</h1>
+					<h4 className="col-12 space-b-lg">{this.state.design.description}</h4>
+
+					<div className="form-group row col-12">
+						<label htmlFor="size-selection" className="col-sm-8 col-form-label">Select your size:</label>
+						<select className="form-control col-sm-4" id="size-selection">
+							<option>XS</option>
+							<option>S</option>
+							<option>M</option>
+							<option>L</option>
+							<option>XL</option>
+							<option>XXL</option>
+						</select>
+					</div>
+
+					<div className="form-group row col-12 space-b-lg">
+						<label htmlFor="quantity-selection" className="col-sm-8 col-form-label">Tell us how many:</label>
+						<select className="form-control col-sm-4" id="quantity-selection">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>5</option>
+							<option>10</option>
+						</select>
+					</div>
+
+					<h3 className="text-center">$ {this.state.design.price}</h3>
+					<button className="col-md-4 offset-md-4 btn btn-primary btn-block">Buy</button>
+				</div>
+			</div>
+		);
+	}
+}
+
+const DetailPage = ({match}) => {
 
 	return (
 		<div>
 			<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", false, "/create"]]}/>
 			<div className="container" id="detail-container">
-				<div className="row">
-					<div className="col-6">
-						<img src="https://dummyimage.com/800x800/000/fff.png" alt="" className="col"/>
-					</div>
-					<div className="col-6">
-						<h1 className="col-12">{design.title}</h1>
-						<h5 className="col-12">{design.description}</h5>
-						<div className="form-group col-6 align-self-start">
-							<label htmlFor="size-selection"></label>
-							<select className="form-control" id="size-selection">
-					      <option>XS</option>
-					      <option>S</option>
-					      <option>M</option>
-					      <option>L</option>
-					      <option>XL</option>
-					      <option>XXL</option>
-					    </select>
-						</div>
-						<h4 className="col-6 text-center align-self-start">${design.price}</h4>
-						<button className="btn btn-primary col-12 btn-block">Buy</button>
-					</div>
-				</div>
+				<Detail detailID={match.params.id} />
 			</div>
-			<Footer />
 		</div>
 	);
 }

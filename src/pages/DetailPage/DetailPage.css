@@ -1,2 +1,11 @@
 #detail-container {
   margin-top: 4em; }
+
+.space-b-sm {
+  margin-bottom: 1rem; }
+
+.space-b-md {
+  margin-bottom: 1.75rem; }
+
+.space-b-lg {
+  margin-bottom: 2.5rem; }
