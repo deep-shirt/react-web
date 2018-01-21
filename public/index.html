@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.min.css">
     <link rel="stylesheet" href="%PUBLIC_URL%/css/animate.css">
-
+    <link href="%PUBLIC_URL%/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <title>DeepShirt</title>
   </head>
   <body>
@@ -22,6 +22,10 @@
     <script src="%PUBLIC_URL%/js/wow.min.js"></script>
     <script>
     	new WOW().init();
+    	$(function() {
+    		// alert("hey")
+    		$('.carousel').carousel()
+    	});
     </script>
   </body>
 </html>

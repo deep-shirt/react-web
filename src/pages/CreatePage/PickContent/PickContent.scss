@@ -13,7 +13,7 @@
 
 .createPage .selectbox{
     padding:15px;
-    height: 250px
+    height: 600px
 }
 
 .createPage .generateBtn{
@@ -31,15 +31,25 @@
     width: fit-content;
 }
 
+.createPage .thumbnailIMG{
+    max-height: 370px;
+    width: auto;
+}
+
+.createPage .tab-pane {
+    padding-top: 10px;
+}
 
 
 .createPage .hide{
    display: none;
 }
-
+.createPage .col-sm{
+    width: 420px;
+}
 .createPage .galery{
     height: 370px;
-    overflow-y: scroll;
+    overflow-y: overlay;;
 }
 
 .createPage .galery .card-img-top:hover{

@@ -12,14 +12,23 @@ class PickContent extends React.Component {
 	constructor(props) {
 		super(props);		
 		this.pickcontent = this.pickcontent.bind(this);
+		var contentImage = window.localStorage.getItem('contentImage')
+		var imageSet = true;
+		if(contentImage == undefined){
+			contentImage = "https://dummyimage.com/800x800/ccc/fff.png";
+			imageSet = false;
+		}
 		this.state = {
-			contentImage : "https://dummyimage.com/800x800/ccc/fff.png"
+			contentImage : contentImage,
+			imageSet:imageSet
 		}
 	}	
 	pickcontent(image){
 		this.setState({
-			contentImage : image
+			contentImage : image,
+			imageSet:true
 		})
+		window.localStorage.setItem('contentImage', image);
 	}
 
 	render() {
@@ -27,41 +36,42 @@ class PickContent extends React.Component {
 			<div>
 				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>
 				<div className="container createPage">
-					<h1 className="display-4">Style creator:</h1>
+					<h1 className="display-4">Style Creator</h1>
 					<div className="contentPicker wow slideInRight" ref="contentPicker">
 						<p className="lead">
 							Upload the image you want to style.
 						</p>
 						<div className="row selectbox">				
-							<div className="col-sm">
+							<div className="col-md">
 								<ul className="nav nav-tabs" role="tablist">
+								
 								<li className="nav-item">
-									<a className="nav-link active" data-toggle="tab" href="#home" role="tab">Upload picture</a>
+									<a className="nav-link active" data-toggle="tab" href="#profile" role="tab">Search image</a>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" data-toggle="tab" href="#profile" role="tab">Select Flickr image</a>
+									<a className="nav-link " data-toggle="tab" href="#home" role="tab">Upload picture</a>
 								</li>
 								</ul>
 								<div className="tab-content">
-									<div className="tab-pane active" id="home" role="tabpanel">
+									<div className="tab-pane " id="home" role="tabpanel">
 										<ImageUpload callback={this.pickcontent}></ImageUpload>
 									</div>
-									<div className="tab-pane" id="profile" role="tabpanel">
+									<div className="tab-pane active" id="profile" role="tabpanel">
 										<FlickerPicker callback={this.pickcontent}></FlickerPicker>
 									</div>
 								</div>		
 							</div>	
-							<div className="col">
-								Content image:
+							<div className="col-md">
+								<p class="font-weight-bold">Selected Main image:</p>
 								<ImageThumbnail imagefile={this.state.contentImage}></ImageThumbnail>
 							</div>
 						</div>
 					</div>
 										
-					<div className="row">	
-						<div className="col generateBtn">
-							<Link to="/create/pickstyle" className="btn btn-success" role="button" id="goto-login">Pick Style</Link>
-						</div>
+					<div className="row float-right">	
+						<div class="btn-group " role="group" aria-label="Basic example">
+							<Link to="/create/pickstyle"  type="button" className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Pick Style image <span class="oi oi-chevron-right"></span></Link>
+						</div>	
 					</div>
 				</div>		
 				
