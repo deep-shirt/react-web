@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
 import './HomePage.css';
 import firebase from '../../firebase';
 
@@ -16,7 +15,7 @@ const GaleryItem = (props) => {
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
 					<p className="card-text">{props.description}</p>
 					<Link to={props.path} className="card-link">Go to listing</Link>
-					<a href="#" className="card-link">Add to cart</a>
+					<a href="/cart" className="card-link">Add to cart</a>
 				</div>
 			</div>
 		</div>
@@ -38,7 +37,7 @@ class Galery extends React.Component {
 
 		var component = this;
 
-		firebase.database().ref("products").limitToLast(3).once("value").then(function(designsRaw) {
+		firebase.db.ref("products").limitToLast(3).once("value").then(function(designsRaw) {
 
 			const itemList = [];
 
