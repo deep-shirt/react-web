@@ -290,7 +290,7 @@ class PreviewPage extends React.Component {
 				data: {
 					"content": content,
 					"style": style,
-					"checkpoint": s,
+					"checkpoint": s + ".ckpt",
 					"num_iterations": 700,
 					"maxsize": 1500,
 				},

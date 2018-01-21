@@ -59,7 +59,10 @@ class Navbar extends React.Component {
 	render() {
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
-				<a href="/" className="navbar-brand">DeepShirt</a>
+				<a href="/" className="navbar-brand">
+					<img id="logo-img" src="/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""/>
+					DeepShirt
+				</a>
 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
 					<span className="navbar-toggler-icon"></span>
 				</button>
