@@ -20,6 +20,8 @@ const  urls = {
 const Carousel = (props) => {
 	if (props.imagesLoaded) {
 		return (
+			<div class="row">
+			<div class="col align-self-center">
 			<div id="preview-carousel" className="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 			    <li data-target="#preview-carousel" data-slide-to="0" class="active"></li>
@@ -30,19 +32,19 @@ const Carousel = (props) => {
 			  </ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-			      <img class="d-block w-100" src={props.previewImage} alt="First slide" />
+			      <img class="d-block image" src={props.previewImage} alt="First slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[0]} alt="Second slide" />
+			      <img class="d-block image" src={props.previewExtras[0]} alt="Second slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[1]} alt="Third slide" />
+			      <img class="d-block image" src={props.previewExtras[1]} alt="Third slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[2]} alt="Forth slide" />
+			      <img class="d-block image " src={props.previewExtras[2]} alt="Forth slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[3]} alt="Fith slide" />
+			      <img class="d-block image" src={props.previewExtras[3]} alt="Fith slide" />
 			    </div>
 				</div>
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -54,13 +56,18 @@ const Carousel = (props) => {
 			    <span class="sr-only">Next</span>
 			  </a>
 			</div>
+			</div>
+		</div>
 		);
 	} else {
 		return (
 			<div className="carousel slide" data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-			      <img class="d-block w-100" src="https://dummyimage.com/800x500/ccc/fff.png" alt="First slide" />
+						
+			      <div className="spinnerBG">
+							<img src="/Flickr-1s-184px.gif"></img>
+						</div>
 			    </div>
 				</div>
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -113,7 +120,7 @@ class Modal extends React.Component {
 							</form>							
 						</div>
 						<div className="modal-footer">
-							<button type="button"  onClick={this.setDataToFireBase} className="btn btn-primary">Save changes</button>
+							<Link to="/" type="button" onClick={this.setDataToFireBase} className={"btn btn-primary "} >Save changes</Link>
 							<button type="button" className="btn btn-secondary" type="submit" data-dismiss="modal">Close</button>
 						</div>
 					</div>
@@ -291,12 +298,14 @@ class PreviewPage extends React.Component {
 				<div className="container createPage">
 					<h1 className="display-4">Design preview</h1>
 					<Carousel imagesLoaded={this.state.imagesLoaded} previewImage={this.state.previewImage} previewExtras={this.state.previewExtras} />
-					<div className="row float-right">	
+			
+					<div className="btns row float-right">	
 						<div class="btn-group" role="group" aria-label="Basic example">
-							<Link to="/create/pickcontent" type="button" className={"btn btn-primary "} ><span class="oi oi-chevron-left"></span> Gernate a new Design</Link>
-							<button type="button" className="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Save design </button>
+							<Link to="/create/pickcontent" type="button" className={"btn btn-danger "} ><span class="oi oi-chevron-left"></span> Generate Design</Link>
+							<button type="button" className={"btn " + (this.state.imagesLoaded ? 'btn-success' :  'btn-secondary disabled')} data-toggle="modal" data-target="#exampleModal"> Save design </button>
 						</div>						
-					</div>	
+				
+					</div>
 					<Modal data={this.state}></Modal>		
 				</div>
 			</div>
