@@ -13,7 +13,7 @@ import DetailPage from './pages/DetailPage/DetailPage';
 import PasswordForgetPage from './pages/PasswordForget/PasswordForget'
 import AccountPage from './pages/Account/Account';
 import * as routes from './constants/routes';
-import Home from './pages/Home';
+
 
 
 class App extends React.Component {
@@ -21,32 +21,16 @@ class App extends React.Component {
     return (
     	<Router>
 			<div>
-<<<<<<< HEAD
-				<Route exact path="/" component={HomePage}/>
-				<Route exact path="/explore" component={ExplorePage}/>
-				<Route exact path="/create/pickcontent" component={PickContent}/>
-				<Route exact path="/create/pickstyle" component={PickStylePage}/>
-				<Route exact path="/create/preview" component={PreviewPage}/>
-				<Route exact path="/login" component={LoginPage}/>
-				<Route exact path="/register" component={RegisterPage}/>
-				<Route exact path="/designs/:id" component={DetailPage}/>
-=======
-				
-				<Route exact path={routes.EXPLOREPAGE} component={ExplorePage}/>
-				<Route exact path={routes.PICKCONTENTPAGE} component={PickContent}/>
-				<Route exact path={routes.PICKSTYLEPAGE} component={PickStylePage}/>
-				<Route exact path={routes.LOGINPAGE} component={LoginPage}/>
-				<Route exact path={routes.REGISTERPAGE} component={RegisterPage}/>
-				<Route exact path={routes.DETAILPAGE} component={DetailPage}/>
-
-
-				<Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetPage />} />
-      			<Route exact path={routes.ACCOUNTPAGE} component={() => <AccountPage />} />
-			    <Route exact path={routes.HOMEPAGE} component={() => <HomePage />} />
-			    <Route exact path={routes.HOME} component={() => <Home />} />
-
-
->>>>>>> auth2
+                <Route exact path="/" component={HomePage}/>
+                <Route exact path="/explore" component={ExplorePage}/>
+                <Route exact path="/create/pickcontent" component={PickContent}/>
+                <Route exact path="/create/pickstyle" component={PickStylePage}/>
+                <Route exact path="/create/preview" component={PreviewPage}/>
+                <Route exact path="/login" component={LoginPage}/>
+                <Route exact path="/register" component={RegisterPage}/>
+                <Route exact path="/designs/:id" component={DetailPage}/>
+                <Route exact path={routes.PASSWORD_FORGET} component={PasswordForgetPage} />
+                <Route exact path={routes.ACCOUNTPAGE} component={AccountPage} />
 			</div>
 		</Router>
     );

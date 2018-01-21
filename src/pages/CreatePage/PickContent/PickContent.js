@@ -2,7 +2,6 @@ import React from 'react';
 import {Navbar,Link} from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import './PickContent.css';
-import { fadeIn } from 'react-animations';
 import $ from 'jquery';
 import firebase from '../../../firebase';
 
@@ -14,7 +13,7 @@ class PickContent extends React.Component {
 		this.pickcontent = this.pickcontent.bind(this);
 		var contentImage = window.localStorage.getItem('contentImage')
 		var imageSet = true;
-		if(contentImage == undefined){
+		if(contentImage === undefined){
 			contentImage = "https://dummyimage.com/800x800/ccc/fff.png";
 			imageSet = false;
 		}
@@ -196,7 +195,7 @@ class ImageUpload extends React.Component {
 }
 
 function ImageThumbnail(props) {
-	if (props.imagefile != undefined){
+	if (props.imagefile !== undefined){
 		return (
 			<div>
 				<div className="card">

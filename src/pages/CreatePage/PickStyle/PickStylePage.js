@@ -1,8 +1,7 @@
 import React from 'react';
 import {Navbar,Link} from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
-import './PickStylePage.css'
-import { fadeIn } from 'react-animations'
+import './PickStylePage.css';
 import firebase from '../../../firebase';
 
 class PickStylePage extends React.Component {
@@ -11,7 +10,7 @@ class PickStylePage extends React.Component {
 		this.pickstyle = this.pickstyle.bind(this);
 		var styleImage = window.localStorage.getItem('styleImage')
 		var imageSet = true;
-		if(styleImage == undefined){
+		if(styleImage === undefined){
 			styleImage = "https://dummyimage.com/800x800/ccc/fff.png";
 			imageSet = false;
 		}
@@ -23,7 +22,7 @@ class PickStylePage extends React.Component {
 	
 
 	pickstyle(imageElement){
-		if(imageElement.target!=undefined){
+		if(imageElement.target!==undefined){
 			imageElement = imageElement.target.src
 		}
 		this.setState({
@@ -154,7 +153,7 @@ const Galery = (props) => {
 
 
 function ImageThumbnail(props) {
-	if (props.imagefile != undefined){
+	if (props.imagefile !== undefined){
 		return (
 			<div>
 				<div className="card">

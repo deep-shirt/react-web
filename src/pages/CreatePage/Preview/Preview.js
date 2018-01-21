@@ -1,12 +1,8 @@
 import React from 'react';
 import { Navbar, Link } from '../../../components/Navbar/Navbar';
-import Footer from '../../../components/Footer/Footer';
 import './Preview.css'
-import { fadeIn } from 'react-animations'
 import $ from 'jquery';
-import firebase from '../../../firebase';
-
-var defaultDatabase = firebase.database();
+import {db} from '../../../firebase';
 
 const  urls = {
 	"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/la_muse.jpg": "la_muse",
@@ -89,8 +85,7 @@ class Modal extends React.Component {
 		this.setDataToFireBase = this.setDataToFireBase.bind(this);
 	}
 	setDataToFireBase(){
-		var defaultDatabase = firebase.database();
-		defaultDatabase.ref("products").push({
+		db.ref("products").push({
 			previewExtras: this.props.data.previewExtras,
 			designUrl: this.props.data.designUrl,
 			contentImage: this.props.data.contentImage,
@@ -121,7 +116,7 @@ class Modal extends React.Component {
 						</div>
 						<div className="modal-footer">
 							<Link to="/" type="button" onClick={this.setDataToFireBase} className={"btn btn-primary "} >Save changes</Link>
-							<button type="button" className="btn btn-secondary" type="submit" data-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
@@ -159,8 +154,8 @@ class PreviewPage extends React.Component {
 			    "Authorization": "Basic " + btoa(api_key),
 			},
 			success: function(data) {
-				if (data.code == '200') {
-					if (data.result.status == "completed") {
+				if (data.code === '200') {
+					if (data.result.status === "completed") {
 						console.log(data);
 						comp.setState({
 							previewImage: data.result.mockups[0].mockup_url,
@@ -220,7 +215,7 @@ class PreviewPage extends React.Component {
 			    "Authorization": "Basic " + btoa(api_key),
 			},
 			success: function(data) {
-				if (data.code == '200') {
+				if (data.code === '200') {
 					comp.setState({
 						taskid: data.result.task_key,
 					});
@@ -250,17 +245,15 @@ class PreviewPage extends React.Component {
 			let api_url = "http://35.197.98.218:8080/fast-style-transfer";
 
 			let s = '',
-					z = 1500,
 					t = 5000;
 
 			for (let k in urls) {
-				if (k == style) s = urls[k];
+				if (k === style) s = urls[k];
 			}
 
-			if (s == ''){
+			if (s === ''){
 				api_url = "http://35.197.98.218:8080/neural-art";
 				s = style;
-				z = 700;
 				t = 60000 * 3;
 			}
 
