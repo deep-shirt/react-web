@@ -111,6 +111,7 @@ const Galery = (props) => {
 }
 
 class FlickerPicker extends React.Component {
+
 	constructor(props) {
 		super(props)
 		this.search = this.search.bind(this);
@@ -124,6 +125,7 @@ class FlickerPicker extends React.Component {
 		var image = e.target.src;
 		this.props.callback(image);
 	}
+
 	search(e) {
 		var text = this.refs.search.value;
 		//https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=9fea3197738d3350425e6b6a2c36a4d4&text=golden%20state&sort=relevance&content_type=1&media=photos&per_page=20&parse_tags=1&format=json&nojsoncallback=1&api_key=9fea3197738d3350425e6b6a2c36a4d4
@@ -204,7 +206,7 @@ function ImageThumbnail(props) {
 		return (
 			<div>
 				<div className="card">
-					<img className="card-img-top thumbnailIMG" src={props.imagefile} alt="Card image cap"></img>
+					<img className="card-img-top thumbnailIMG" src={props.imagefile} alt="Card cap"></img>
 				</div>
 			</div>
 		);

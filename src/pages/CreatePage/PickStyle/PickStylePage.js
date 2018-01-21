@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar,Link} from '../../../components/Navbar/Navbar';
+import { Navbar, Link } from '../../../components/Navbar/Navbar';
 import './PickStylePage.css';
 import firebase from '../../../firebase';
 
@@ -25,7 +25,7 @@ class PickStylePage extends React.Component {
 
 	pickstyle(imageElement){
 
-		if(imageElement.target!==undefined){
+		if(imageElement.target!==undefined) {
 			imageElement = imageElement.target.src
 		}
 
@@ -91,28 +91,28 @@ class PickStylePage extends React.Component {
 	}
 }
 
-
 class ImageUpload extends React.Component {
+
 	constructor(props) {
 		super(props)
 		this.pickfile = this.pickfile.bind(this);
 	}
-	uploadFile(file,cb){
-		var storageRef = firebase.storage().ref();
 
-		var ref = storageRef.child('uploaded/content/'+file.name);
-		ref.put(file).then(function(snapshot) {
+	uploadFile(file, cb) {
+
+		firebase.storage().ref().child("uploaded/content/" + file.name).put(file).then(function(snapshot) {
 			var url = snapshot.downloadURL;
 			cb(url);
 		});
-		// Initialize Firebase
 	}
+
 	pickfile(e) {
-		var files =e.target.files;
+		var files = e.target.files;
 		if(files.length > 0){
-			this.uploadFile(files[0],this.props.callback)
+			this.uploadFile(files[0], this.props.callback)
 		}
 	}
+
 	render() {
 		return (
 			<div>
@@ -138,7 +138,8 @@ const GaleryItem = (props) => {
 }
 
 const Galery = (props) => {
-	const  urls = [
+
+	const urls = [
 		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/la_muse.jpg",
 		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/rain_princess.jpg",
 		"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/the_scream.jpg",
@@ -163,7 +164,7 @@ function ImageThumbnail(props) {
 		return (
 			<div>
 				<div className="card">
-					<img className="card-img-top thumbnailIMG" src={props.imagefile} alt="Card image cap"></img>
+					<img className="card-img-top thumbnailIMG" src={props.imagefile} alt="Card cap"></img>
 				</div>
 			</div>
 		);

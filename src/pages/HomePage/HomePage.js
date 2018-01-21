@@ -45,15 +45,15 @@ class Galery extends React.Component {
 			for(let i in designs) {
 				if (designs[i].name && designs[i].previewImage && designs[i].previewExtras) {
 					itemList.push(
-						<GaleryItem 
-							key={i} 
-							path={"/designs/" + i} 
-							name={designs[i].name} 
-							prev={designs[i].previewImage} 
-							description={designs[i].description} 
-							price={designs[i].price} 
-							img1={designs[i].previewExtras[0]} 
-							img2={designs[i].previewExtras[1]} 
+						<GaleryItem
+							key={i}
+							path={"/designs/" + i}
+							name={designs[i].name}
+							prev={designs[i].previewImage}
+							description={designs[i].description}
+							price={designs[i].price}
+							img1={designs[i].previewExtras[0]}
+							img2={designs[i].previewExtras[1]}
 							img3={designs[i].previewExtras[2]} />
 					);
 				}
@@ -78,25 +78,40 @@ class HomePage extends React.Component {
 				<Navbar menuItems={[["Home", true, "/"], ["Explore", false, "/explore"], ["Create", false, "/create/pickcontent"]]}/>
 
 				<div className="container-fluid">
+
 					<div className="row">
 						<div className="jumbotron col-12 col-lg-10 offset-lg-1 wow fadeInRight" id="time-container">
-							<h1>AAd : BBh : CCm : DDs</h1>
+							<h1>Unleash your inner Dalí.</h1>
 						</div>
 					</div>
-					<Galery />
-				</div>
-				<div className="container-fluid">
-					<div className="row">
-						<div className="jumbotron col-12 wow fadeIn" id="demo-container" data-wow-delay="0.4s">
-							<h1>HOW DOES</h1>
-							<h1>IT WORK ?</h1>
 
-							<div className="embed-responsive embed-responsive-16by9">
-							  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/cHcVU5cGUNE?rel=0"></iframe>
-							</div>
-						</div>
-					</div>
+					<Galery />
+
 				</div>
+
+				<div className="container-fluid">
+
+					<div className="row">
+
+						<div className="jumbotron col-12 wow fadeIn" id="demo-container" data-wow-delay="0.4s">
+
+							<h1>HOW DOES</h1>
+							<h1>IT WORK?</h1>
+							<div className="embed-responsive embed-responsive-16by9">
+								<iframe title="How does Deep Shirt Solutions work?" className="embed-responsive-item" src="https://www.youtube.com/embed/cHcVU5cGUNE?rel=0"></iframe>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<blockquote class="homequote blockquote text-center">
+					<h3 class="mb-0">&raquo;This world is but a canvas to our imagination.&laquo;</h3>
+					<footer class="blockquote-footer">Henry David Thoreau</footer>
+				</blockquote>
+
 			</div>
 		);
 	}

@@ -26,9 +26,42 @@ class Detail extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="col-6">
-					<img src={this.state.design.designUrl} alt={"Image for " + this.state.design.name} className="col"/>
-				</div>
+				<div className="col-6 align-self-center">
+                    <div id="preview-carousel" className="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#preview-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#preview-carousel" data-slide-to="1"></li>
+                            <li data-target="#preview-carousel" data-slide-to="2"></li>
+                            <li data-target="#preview-carousel" data-slide-to="3"></li>
+                            <li data-target="#preview-carousel" data-slide-to="4"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block image" src={this.state.design.designUrl} alt="Close-up style" />
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block image" src={this.state.design.previewExtras['0']} alt="Human wearing your style, 1" />
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block image" src={this.state.design.previewExtras[1]} alt="Human wearing your style, 2" />
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block image" src={this.state.design.previewExtras[2]} alt="Human wearing your style, 3" />
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block image" src={this.state.design.previewExtras[3]} alt="Fith slide" />
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
 				<div className="col-6">
 
 					<h1 className="col-12 space-b-sm">{this.state.design.name}</h1>
