@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as firebase from 'firebase';
+import { auth } from '../../firebase';
 import SignOutButton from '../../pages/SignOut'
 import './Navbar.css'
 
@@ -67,7 +67,7 @@ class Navbar extends React.Component {
 				<div className="collapse navbar-collapse" id="navbar">
 					<Menu menuItems={this.props.menuItems}/>
 					<div className="my-2 my-lg-2">
-						<AuthManage user={firebase.auth().currentUser} />
+						<AuthManage user={auth.getCurrentUser()} />
 					</div>
 				</div>
 			</nav>
