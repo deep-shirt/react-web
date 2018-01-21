@@ -162,7 +162,7 @@ class PreviewPage extends React.Component {
 	loadTeeShirts() {
 
 		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
-		let api_url = "https://api.printful.com/mockup-generator/task?task_key=" + this.state.taskid;
+		let api_url = "https://deep-shirt.com/printful/task?task_key=" + this.state.taskid;
 		let comp = this;
 
 		$.ajax({
@@ -210,7 +210,7 @@ class PreviewPage extends React.Component {
 		let g = Math.floor(Math.random() * ids.length);
 
 		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
-		let api_url = "https://api.printful.com/mockup-generator/create-task/" + ids[g][0];
+		let api_url = "https://deep-shirt.com/printful/create-task/" + ids[g][0];
 		let api_body = {
 			"variant_ids": [ids[g][1]],
 			"format": "jpg",
