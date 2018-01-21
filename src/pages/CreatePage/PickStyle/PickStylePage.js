@@ -3,6 +3,7 @@ import {Navbar,Link} from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import './PickStylePage.css'
 import { fadeIn } from 'react-animations'
+import firebase from '../../../firebase';
 
 class PickStylePage extends React.Component {
 	constructor(props) {
@@ -18,14 +19,18 @@ class PickStylePage extends React.Component {
 			styleImage : styleImage,
 			imageSet:imageSet
 		}
-	}	
+	}
+	
 
 	pickstyle(imageElement){
+		if(imageElement.target!=undefined){
+			imageElement = imageElement.target.src
+		}
 		this.setState({
-			styleImage : imageElement.target.src,
+			styleImage : imageElement,
 			imageSet: true
 		})
-		window.localStorage.setItem('styleImage', imageElement.target.src);
+		window.localStorage.setItem('styleImage', imageElement);
 	}
 	
 	render() {
@@ -54,7 +59,7 @@ class PickStylePage extends React.Component {
 										<Galery callback={this.pickstyle}></Galery>
 									</div>
 									<div className="tab-pane" id="user-style" role="tabpanel">
-										
+										<ImageUpload callback={this.pickstyle}></ImageUpload>
 									</div>
 								</div>		
 							</div>	
@@ -80,6 +85,42 @@ class PickStylePage extends React.Component {
 		);
 	}
 }
+
+
+class ImageUpload extends React.Component {
+	constructor(props) {
+		super(props)
+		this.pickfile = this.pickfile.bind(this);
+	}
+	uploadFile(file,cb){
+		var storageRef = firebase.storage().ref();
+		
+		var ref = storageRef.child('uploaded/content/'+file.name);
+		ref.put(file).then(function(snapshot) {
+			var url = snapshot.downloadURL;
+			cb(url);
+		});
+		// Initialize Firebase
+	}
+	pickfile(e) {
+		var files =e.target.files; 
+		if(files.length > 0){
+			this.uploadFile(files[0],this.props.callback)			
+		}
+	}
+	render() {
+		return (
+			<div>
+				<form>
+					<div className="form-group">					
+						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
+					</div>
+				</form>
+			</div>
+		)
+	}
+}
+
 
 const GaleryItem = (props) => {
 	return (

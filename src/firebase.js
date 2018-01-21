@@ -1,12 +1,12 @@
 import firebase from 'firebase';
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyAc6p07lJWvRF35vVmNJcYQjhCz5NPTlV0",
-    authDomain: "deepshirtwebapp.firebaseapp.com",
-    databaseURL: "https://deepshirtwebapp.firebaseio.com",
-    projectId: "deepshirtwebapp",
-    storageBucket: "deepshirtwebapp.appspot.com",
-    messagingSenderId: "371105960911"
+    apiKey: "AIzaSyCCvRrXL0MfEHj86_NvadKqaipSHeQ9WN8",
+    authDomain: "deep-shirt.firebaseapp.com",
+    databaseURL: "https://deep-shirt.firebaseio.com",
+    projectId: "deep-shirt",
+    storageBucket: "deep-shirt.appspot.com",
+    messagingSenderId: "81835696322"
   };
   firebase.initializeApp(config);
   // var config = {

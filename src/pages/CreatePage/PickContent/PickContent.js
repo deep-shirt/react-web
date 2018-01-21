@@ -4,6 +4,9 @@ import Footer from '../../../components/Footer/Footer';
 import './PickContent.css'
 import { fadeIn } from 'react-animations'
 import $ from 'jquery';
+import firebase from '../../../firebase';
+
+
 
 class PickContent extends React.Component {
 	constructor(props) {
@@ -112,6 +115,7 @@ class FlickerPicker extends React.Component {
 			images: [],
 		}
 	}
+
 	click(e){
 		var image = e.target.src;
 		this.props.callback(image);
@@ -140,17 +144,6 @@ class FlickerPicker extends React.Component {
 				images: res.photos.photo
 			})
 		});
-		/*
-		flickr.photos.search(query)
-		.then(function (res) {
-			console.log('yay!', res.body);
-			self.setState({
-				images: res.body.photos.photo
-			})
-		  }).catch(function (err) {
-			console.error('bonk', err);
-		  });
-		  */
 	}
 	render() {
 		return (
@@ -175,17 +168,20 @@ class ImageUpload extends React.Component {
 		super(props)
 		this.pickfile = this.pickfile.bind(this);
 	}
-	pickfile(e,callback) {
+	uploadFile(file,cb){
+		var storageRef = firebase.storage().ref();
+		
+		var ref = storageRef.child('uploaded/content/'+file.name);
+		ref.put(file).then(function(snapshot) {
+			var url = snapshot.downloadURL;
+			cb(url);
+		});
+		// Initialize Firebase
+	}
+	pickfile(e) {
 		var files =e.target.files; 
 		if(files.length > 0){
-			var reader = new FileReader();
-			var self = this;
-			// Closure to capture the file information.
-			reader.onload = function(fileE) {
-				self.props.callback(fileE.target.result)
-			}
-			// Read in the image file as a data URL.
-			reader.readAsDataURL(files[0]);
+			this.uploadFile(files[0],this.props.callback)			
 		}
 	}
 	render() {
@@ -193,7 +189,6 @@ class ImageUpload extends React.Component {
 			<div>
 				<form>
 					<div className="form-group">					
-						<div className="dragDiv">Drag file here</div>
 						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
 					</div>
 				</form>
