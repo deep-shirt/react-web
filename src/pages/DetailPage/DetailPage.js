@@ -128,7 +128,7 @@ const DetailPage = ({match}) => {
 
 	return (
 		<div>
-			<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", false, "/create"]]}/>
+			<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", false, "/create/pickcontent"]]}/>
 			<div className="container" id="detail-container">
 				<Detail detailID={match.params.id} />
 			</div>
