@@ -4,6 +4,9 @@ import Footer from '../../../components/Footer/Footer';
 import './Preview.css'
 import { fadeIn } from 'react-animations'
 import $ from 'jquery';
+import firebase from '../../../firebase';
+
+var defaultDatabase = firebase.database();
 
 const  urls = {
 	"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/la_muse.jpg": "la_muse",
@@ -17,6 +20,8 @@ const  urls = {
 const Carousel = (props) => {
 	if (props.imagesLoaded) {
 		return (
+			<div class="row">
+			<div class="col align-self-center">
 			<div id="preview-carousel" className="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 			    <li data-target="#preview-carousel" data-slide-to="0" class="active"></li>
@@ -27,19 +32,19 @@ const Carousel = (props) => {
 			  </ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-			      <img class="d-block w-100" src={props.previewImage} alt="First slide" />
+			      <img class="d-block image" src={props.previewImage} alt="First slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[0]} alt="Second slide" />
+			      <img class="d-block image" src={props.previewExtras[0]} alt="Second slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[1]} alt="Third slide" />
+			      <img class="d-block image" src={props.previewExtras[1]} alt="Third slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[2]} alt="Forth slide" />
+			      <img class="d-block image " src={props.previewExtras[2]} alt="Forth slide" />
 			    </div>
 					<div class="carousel-item">
-			      <img class="d-block w-100" src={props.previewExtras[3]} alt="Fith slide" />
+			      <img class="d-block image" src={props.previewExtras[3]} alt="Fith slide" />
 			    </div>
 				</div>
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -51,13 +56,18 @@ const Carousel = (props) => {
 			    <span class="sr-only">Next</span>
 			  </a>
 			</div>
+			</div>
+		</div>
 		);
 	} else {
 		return (
 			<div className="carousel slide" data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-			      <img class="d-block w-100" src="https://dummyimage.com/800x500/ccc/fff.png" alt="First slide" />
+						
+			      <div className="spinnerBG">
+							<img src="/Flickr-1s-184px.gif"></img>
+						</div>
 			    </div>
 				</div>
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -70,6 +80,54 @@ const Carousel = (props) => {
 			  </a>
 			</div>
 		);
+	}
+}
+
+class Modal extends React.Component {
+	constructor(props){
+		super(props);
+		this.setDataToFireBase = this.setDataToFireBase.bind(this);
+	}
+	setDataToFireBase(){
+		var defaultDatabase = firebase.database();
+		defaultDatabase.ref("products").push({
+			previewExtras: this.props.data.previewExtras,
+			designUrl: this.props.data.designUrl,
+			contentImage: this.props.data.contentImage,
+			styleImage: this.props.data.styleImage,
+			price:6,
+			name:this.refs.name.value
+		});
+	}
+	render(){
+		return (
+		<div>
+			<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog" role="document">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h5 className="modal-title">Save new Style</h5>
+							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div className="modal-body">
+							<p>Please enter the name of your Style</p>
+							<form>
+								<div className="form-group">
+									<input type="text" ref="name" className="form-control" id="styleName" required placeholder="Name"></input>
+								</div>
+							</form>							
+						</div>
+						<div className="modal-footer">
+							<Link to="/" type="button" onClick={this.setDataToFireBase} className={"btn btn-primary "} >Save changes</Link>
+							<button type="button" className="btn btn-secondary" type="submit" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
 	}
 }
 
@@ -118,6 +176,7 @@ class PreviewPage extends React.Component {
 							previewExtras: e,
 							imagesLoaded: true,
 						});
+						
 					} else {
 						window.setTimeout(comp.loadTeeShirts(), 300);
 					}
@@ -166,6 +225,8 @@ class PreviewPage extends React.Component {
 						taskid: data.result.task_key,
 					});
 					window.setTimeout(comp.loadTeeShirts(), 50);
+					
+					
 				}
 			},
 			error: function(err) {
@@ -231,14 +292,21 @@ class PreviewPage extends React.Component {
 	}
 	
 	render() {
-
-
 		return (
 			<div>
 				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>		
 				<div className="container createPage">
 					<h1 className="display-4">Design preview</h1>
 					<Carousel imagesLoaded={this.state.imagesLoaded} previewImage={this.state.previewImage} previewExtras={this.state.previewExtras} />
+			
+					<div className="btns row float-right">	
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<Link to="/create/pickcontent" type="button" className={"btn btn-danger "} ><span class="oi oi-chevron-left"></span> Generate Design</Link>
+							<button type="button" className={"btn " + (this.state.imagesLoaded ? 'btn-success' :  'btn-secondary disabled')} data-toggle="modal" data-target="#exampleModal"> Save design </button>
+						</div>						
+				
+					</div>
+					<Modal data={this.state}></Modal>		
 				</div>
 			</div>
 		);
