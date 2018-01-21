@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
 import './ExplorePage.css'
+import firebase from '../../firebase';
 
 const cards = [];
 
@@ -25,7 +25,7 @@ const GaleryItem = (props) => {
 	return (
 		<div className="col-12 col-md-6 col-lg-4 col-xl-3">
 			<div className="card wow fadeIn" data-wow-delay="0.2s">
-				<img src="https://dummyimage.com/800x800/000/fff.png" alt="" className="card-img-top"/>
+				<img src={props.url} alt="" className="card-img-top"/>
 				<div className="card-body">
 					<h5 className="card-title">{props.title}</h5>
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
@@ -38,16 +38,46 @@ const GaleryItem = (props) => {
 	);
 }
 
-const Galery = () => {
-	const itemList = [];
+class Galery extends React.Component {
+	constructor(props) {
+		super(props);
 
-	for (let card of cards) {
-		itemList.push(<GaleryItem key={card.id} title={card.title} url={card.url} price={card.price} img1={card.imgs[0]} img2={card.imgs[1]} img3={card.imgs[2]} />);
+		this.state = {
+			imgSet: [],
+		}
+		this.getDesigns();
 	}
 
-	return (
-		<div className="row">{itemList}</div>
-	);
+	getDesigns() {
+		let comp = this;
+
+		firebase.db.ref('products').limitToLast(50).once('value').then((snap) => {
+			let itemList = [];
+			let results = snap.val();
+
+			for (let i in results) {
+				itemList.push(
+					<GaleryItem 
+						key={i} 
+						path={"/designs/" + i} 
+						title={results[i].title} 
+						url={results[i].designUrl} 
+						description="lol" 
+						price={results[i].price}  />
+				);
+			}
+
+			comp.setState({
+				imgSet: itemList
+			});
+		});
+	}
+
+	render() {
+		return (
+			<div className="row">{this.state.imgSet}</div>
+		);
+	}
 }
 
 class ExplorePage extends React.Component {
@@ -59,7 +89,6 @@ class ExplorePage extends React.Component {
 				<div className="container-fluid">
 					<Galery />
 				</div>
-				<Footer />
 			</div>
 		);
 	}

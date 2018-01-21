@@ -62,15 +62,15 @@ class PickContent extends React.Component {
 								</div>
 							</div>
 							<div className="col-md">
-								<p class="font-weight-bold">Selected Main image:</p>
+								<p className="font-weight-bold">Selected Main image:</p>
 								<ImageThumbnail imagefile={this.state.contentImage}></ImageThumbnail>
 							</div>
 						</div>
 					</div>
 
 					<div className="row float-right">
-						<div class="btn-group " role="group" aria-label="Basic example">
-							<Link to="/create/pickstyle"  type="button" className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Pick Style image <span class="oi oi-chevron-right"></span></Link>
+						<div className="btn-group " role="group" aria-label="Basic example">
+							<Link to="/create/pickstyle"  type="button" className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Pick Style image <span className="oi oi-chevron-right"></span></Link>
 						</div>
 					</div>
 				</div>
@@ -149,7 +149,7 @@ class FlickerPicker extends React.Component {
 			<div>
 				<div className="input-group mb-3">
 
-  				<input type="text" ref="search" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"></input>
+  				<input type="text" ref="search" className="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"></input>
 				  <div className="input-group-append">
     				<button onClick={this.search} className="btn btn-outline-secondary" type="button">Search</button>
   				</div>
