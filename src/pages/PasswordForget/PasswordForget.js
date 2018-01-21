@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import Navbar from '../../components/Navbar/Navbar';
 import { auth } from '../../firebase';
 import * as routes from '../../constants/routes';
 
 const PasswordForgetPage = () =>
   <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
+		<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", false, "/create"]]}/>
+    <div className="container">
+			<div className="row align-items-center">
+				<div className="col-s-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 align-self-center">
+					<div className="jumbotron wow slideInRight" id="register-form-container">
+						<h2>Forgot your password?</h2>
+						<PasswordForgetForm />
+					</div>
+				</div>
+			</div>
+		</div>
   </div>
 
 const updateByPropertyName = (propertyName, value) => () => ({
@@ -50,13 +60,18 @@ class PasswordForgetForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          value={this.state.email}
-          onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <button disabled={isInvalid} type="submit">
+      	<div className="form-group">
+  				<label htmlFor="reset-input-email">Email</label>
+	        <input
+	        	id="reset-input-email"
+	        	className="form-control form-control-lg"
+	          value={this.state.email}
+	          onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+	          type="email"
+	          placeholder="darth@maul.sith"
+	        />
+        </div>
+        <button className="btn btn-lg btn-block btn-primary" disabled={isInvalid} type="submit">
           Reset My Password
         </button>
 
