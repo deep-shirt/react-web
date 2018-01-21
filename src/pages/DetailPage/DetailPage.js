@@ -3,6 +3,31 @@ import Navbar from '../../components/Navbar/Navbar';
 import firebase from '../../firebase';
 import './DetailPage.css'
 
+const Carousel = (props) => {
+	return (
+		<div id="detail-carousel" className="carousel slide" data-ride="carousel">
+		  <ol className="carousel-indicators">
+		      <li data-target="#detail-carousel" data-slide-to="0" className="active"></li>
+		      <li data-target="#detail-carousel" data-slide-to="1"></li>
+		      <li data-target="#detail-carousel" data-slide-to="2"></li>
+		      <li data-target="#detail-carousel" data-slide-to="3"></li>
+		      <li data-target="#detail-carousel" data-slide-to="4"></li>
+		  </ol>
+		  <div className="carousel-inner">
+		    {props.imgs}
+		  </div>
+		  <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+		      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+		      <span className="sr-only">Previous</span>
+		  </a>
+		  <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+		      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+		      <span className="sr-only">Next</span>
+		  </a>
+		</div>
+	);
+}
+
 class Detail extends React.Component {
 
 	constructor(props) {
@@ -10,16 +35,43 @@ class Detail extends React.Component {
 		super(props);
 		this.state = {
 			design: {},
+			imgs: []
 		};
-		this.getDesign();
 	}
 
-	getDesign() {
-
+	componentDidMount() {
 		var component = this;
 
 		firebase.db.ref("products/" + this.props.detailID).once("value").then(function(item) {
-			component.setState({design: item.val()});
+			let design = item.val();
+			let urls = [],
+					imgs = [];
+
+			urls.push(design.previewImage);
+			for (let i of design.previewExtras) {
+				urls.push(i);
+			}
+
+			for (let i = 0; i < urls.length; i++) {
+				if (i === 0) {
+					imgs.push(
+						<div key={i} className="carousel-item active">
+		          <img className="d-block image" src={urls[i]} alt="Close-up style" />
+			      </div>
+					);
+				} else {
+					imgs.push(
+						<div key={i} className="carousel-item">
+		          <img className="d-block image" src={urls[i]} alt="Close-up style" />
+			      </div>
+					);
+				}
+			}
+
+			component.setState({
+				design: design,
+				imgs: imgs,
+			});
 		});
 	}
 
@@ -27,41 +79,8 @@ class Detail extends React.Component {
 		return (
 			<div className="row">
 				<div className="col-6 align-self-center">
-                    <div id="preview-carousel" className="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#preview-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#preview-carousel" data-slide-to="1"></li>
-                            <li data-target="#preview-carousel" data-slide-to="2"></li>
-                            <li data-target="#preview-carousel" data-slide-to="3"></li>
-                            <li data-target="#preview-carousel" data-slide-to="4"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block image" src={this.state.design.designUrl} alt="Close-up style" />
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block image" src={this.state.design.previewExtras['0']} alt="Human wearing your style, 1" />
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block image" src={this.state.design.previewExtras[1]} alt="Human wearing your style, 2" />
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block image" src={this.state.design.previewExtras[2]} alt="Human wearing your style, 3" />
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block image" src={this.state.design.previewExtras[3]} alt="Fith slide" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
+        	<Carousel imgs={this.state.imgs} />    
+        </div>
 				<div className="col-6">
 
 					<h1 className="col-12 space-b-sm">{this.state.design.name}</h1>
