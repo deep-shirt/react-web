@@ -1,0 +1,19 @@
+img.d-block.image {
+  max-height: 550px;
+  height: 550px;
+  margin: auto; }
+
+.btns {
+  margin: 15px; }
+
+.spinnerBG {
+  height: 550px;
+  width: 550px;
+  background: #ccc;
+  margin: auto;
+  display: block; }
+
+.spinnerBG img {
+  position: relative;
+  top: 170px;
+  left: 150px; }
