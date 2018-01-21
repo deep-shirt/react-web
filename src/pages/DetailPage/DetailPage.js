@@ -35,8 +35,11 @@ class Detail extends React.Component {
 		super(props);
 		this.state = {
 			design: {},
-			imgs: []
+			imgs: [],
+            value: 0
 		};
+
+        this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -75,6 +78,10 @@ class Detail extends React.Component {
 		});
 	}
 
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
 	render() {
 		return (
 			<div className="row">
@@ -100,16 +107,16 @@ class Detail extends React.Component {
 
 					<div className="form-group row col-12 space-b-lg">
 						<label htmlFor="quantity-selection" className="col-sm-8 col-form-label">Tell us how many:</label>
-						<select className="form-control col-sm-4" id="quantity-selection">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>5</option>
-							<option>10</option>
+						<select className="form-control col-sm-4" id="quantity-selection" value={this.state.value} onChange={this.handleChange}>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='5'>5</option>
+							<option value='10'>10</option>
 						</select>
 					</div>
 
-					<h3 className="text-center">$ {this.state.design.price}</h3>
+					<h3 className="text-center">$ {this.state.value === 0 ? this.state.design.price : (this.state.design.price * this.state.value).toFixed(2) }</h3>
 					<button className="col-md-4 offset-md-4 btn btn-primary btn-block disabled">Store coming soon!</button>
 				</div>
 			</div>
