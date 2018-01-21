@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar,Link} from '../../../components/Navbar/Navbar';
 import './PickContent.css';
 import $ from 'jquery';
-import firebase from '../../../firebase';
+import * as firebase from 'firebase';
 
 
 class PickContent extends React.Component {

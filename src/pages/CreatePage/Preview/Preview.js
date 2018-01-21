@@ -20,8 +20,8 @@ const Carousel = (props) => {
 			<div class="row">
 				<div class="col align-self-center">
 					<div id="preview-carousel" className="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#preview-carousel" data-slide-to="0" class="active"></li>
+						<ol className="carousel-indicators">
+							<li data-target="#preview-carousel" data-slide-to="0" className="active"></li>
 							<li data-target="#preview-carousel" data-slide-to="1"></li>
 							<li data-target="#preview-carousel" data-slide-to="2"></li>
 							<li data-target="#preview-carousel" data-slide-to="3"></li>
@@ -204,10 +204,14 @@ class PreviewPage extends React.Component {
 	}
 
 	requestTeeShirts() {
+		let ids = [[257, 8852], [260, 8880]]; // men1, women1, 
+
+		let g = Math.floor(Math.random() * ids.length);
+
 		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
-		let api_url = "https://api.printful.com/mockup-generator/create-task/257";
+		let api_url = "https://api.printful.com/mockup-generator/create-task/" + ids[g][0];
 		let api_body = {
-			"variant_ids": [8852],
+			"variant_ids": [ids[g][1]],
 			"format": "jpg",
 			"files": [{
 				"placement": "default",
@@ -275,7 +279,7 @@ class PreviewPage extends React.Component {
 			if (s === ''){
 				api_url = "http://35.197.98.218:8080/neural-art";
 				s = style;
-				t = 60000 * 3;
+				t = 0;
 			}
 
 			let comp = this;
