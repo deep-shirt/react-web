@@ -3,10 +3,7 @@ import {Navbar,Link} from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import './PickContent.css'
 import { fadeIn } from 'react-animations'
-
-import Flickr from 'flickr-sdk';
-
-var flickr = new Flickr("9fea3197738d3350425e6b6a2c36a4d4");
+import $ from 'jquery';
 
 class PickContent extends React.Component {
 	constructor(props) {
@@ -121,7 +118,11 @@ class FlickerPicker extends React.Component {
 	}
 	search(e) {
 		var text = this.refs.search.value;
+		//https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=9fea3197738d3350425e6b6a2c36a4d4&text=golden%20state&sort=relevance&content_type=1&media=photos&per_page=20&parse_tags=1&format=json&nojsoncallback=1&api_key=9fea3197738d3350425e6b6a2c36a4d4
 		var query = {
+			method: "flickr.photos.search",
+			format:"json",
+			nojsoncallback:1,
 			api_key : "9fea3197738d3350425e6b6a2c36a4d4",
 			text : text,
 			sort:"relevance",
@@ -132,6 +133,14 @@ class FlickerPicker extends React.Component {
 			parse_tags:1
 		}
 		var self = this;
+		$.get( "https://api.flickr.com/services/rest", query )
+		.done(function( res ) {
+			console.log('yay!', res);
+			self.setState({
+				images: res.photos.photo
+			})
+		});
+		/*
 		flickr.photos.search(query)
 		.then(function (res) {
 			console.log('yay!', res.body);
@@ -141,6 +150,7 @@ class FlickerPicker extends React.Component {
 		  }).catch(function (err) {
 			console.error('bonk', err);
 		  });
+		  */
 	}
 	render() {
 		return (
