@@ -105,12 +105,13 @@ class Modal extends React.Component {
 		firebase.db.ref("products").push(item)
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
+		$(this.refs.modalDialog).modal('toggle')
 	}
 
 	render(){
 		return (
 			<div>
-				<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal fade" ref="modalDialog" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div className="modal-dialog" role="document">
 						<div className="modal-content">
 							<div className="modal-header">
