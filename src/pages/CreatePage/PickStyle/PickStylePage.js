@@ -1,57 +1,62 @@
 import React from 'react';
 import {Navbar,Link} from '../../../components/Navbar/Navbar';
-import Footer from '../../../components/Footer/Footer';
 import './PickStylePage.css';
 import firebase from '../../../firebase';
 
 class PickStylePage extends React.Component {
+
 	constructor(props) {
-		super(props);		
+
+		super(props);
 		this.pickstyle = this.pickstyle.bind(this);
 		var styleImage = window.localStorage.getItem('styleImage')
 		var imageSet = true;
+
 		if(styleImage === undefined){
 			styleImage = "https://dummyimage.com/800x800/ccc/fff.png";
 			imageSet = false;
 		}
+
 		this.state = {
 			styleImage : styleImage,
 			imageSet:imageSet
 		}
 	}
-	
 
 	pickstyle(imageElement){
+
 		if(imageElement.target!==undefined){
 			imageElement = imageElement.target.src
 		}
+
 		this.setState({
 			styleImage : imageElement,
 			imageSet: true
 		})
+
 		window.localStorage.setItem('styleImage', imageElement);
 	}
-	
+
 	render() {
 		return (
 			<div>
+
 				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>
 				<div className="container createPage">
-					<h1 className="display-4">Style Creator</h1>
-					
+
 					<div className="stylePicker wow slideInRight">
-						<p className="lead">
-							Select the style 
-						</p>
-						<div className="row selectbox">				
+
+						<h1 className="title">Select a style picture.</h1>
+						<div className="row selectbox">
+
 							<div className="col-sm">
 								<ul className="nav nav-tabs" role="tablist-style">
-								<li className="nav-item">
-									<a className="nav-link active" data-toggle="tab" href="#pre-style" role="tab">Predefined styles</a>
-								</li>
-								<li className="nav-item">
-									<a className="nav-link" data-toggle="tab" href="#user-style" role="tab">Upload own style</a>
-								</li>
+									<li className="nav-item">
+										<a className="nav-link active" data-toggle="tab" href="#pre-style" role="tab">Predefined styles</a>
+									</li>
+									<li className="nav-item">
+										<a className="nav-link" data-toggle="tab" href="#user-style" role="tab">Upload your own style</a>
+									</li>
 								</ul>
 								<div className="tab-content">
 									<div className="tab-pane active" id="pre-style" role="tabpanel">
@@ -60,26 +65,27 @@ class PickStylePage extends React.Component {
 									<div className="tab-pane" id="user-style" role="tabpanel">
 										<ImageUpload callback={this.pickstyle}></ImageUpload>
 									</div>
-								</div>		
-							</div>	
+								</div>
+							</div>
+
 							<div className="col">
-									<p className="font-weight-bold">Selected Style image:</p>									
-									<ImageThumbnail imagefile={this.state.styleImage}></ImageThumbnail>
+								<p className="font-weight-bold">Selected style image:</p>
+								<ImageThumbnail imagefile={this.state.styleImage}></ImageThumbnail>
+							</div>
+
+						</div>
+
+						<div className="row">
+							<div className="btn btn-group mx-auto" role="group" aria-label="Basic example">
+								<Link to="/create/pickcontent" type="button" className={"btn btn-primary "} ><span className="oi oi-chevron-left"></span> Pick Main image</Link>
+								<Link to="/create/preview"  type="button"  className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Generate Design <span className="oi oi-chevron-right"></span></Link>
 							</div>
 						</div>
+
 					</div>
-					
-					<div className="row float-right">	
-						<div className="btn-group" role="group" aria-label="Basic example">
-							<Link to="/create/pickcontent" type="button" className={"btn btn-primary "} ><span className="oi oi-chevron-left"></span> Pick Main image</Link>
-							<Link to="/create/preview"  type="button"  className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Generate Design <span className="oi oi-chevron-right"></span></Link>
-						</div>						
-					</div>					
-					
-					
-				</div>			
-				
-				<Footer />
+
+				</div>
+
 			</div>
 		);
 	}
@@ -93,7 +99,7 @@ class ImageUpload extends React.Component {
 	}
 	uploadFile(file,cb){
 		var storageRef = firebase.storage().ref();
-		
+
 		var ref = storageRef.child('uploaded/content/'+file.name);
 		ref.put(file).then(function(snapshot) {
 			var url = snapshot.downloadURL;
@@ -102,16 +108,16 @@ class ImageUpload extends React.Component {
 		// Initialize Firebase
 	}
 	pickfile(e) {
-		var files =e.target.files; 
+		var files =e.target.files;
 		if(files.length > 0){
-			this.uploadFile(files[0],this.props.callback)			
+			this.uploadFile(files[0],this.props.callback)
 		}
 	}
 	render() {
 		return (
 			<div>
 				<form>
-					<div className="form-group">					
+					<div className="form-group">
 						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
 					</div>
 				</form>

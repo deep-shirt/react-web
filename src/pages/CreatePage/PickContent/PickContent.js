@@ -1,6 +1,5 @@
 import React from 'react';
 import {Navbar,Link} from '../../../components/Navbar/Navbar';
-import Footer from '../../../components/Footer/Footer';
 import './PickContent.css';
 import $ from 'jquery';
 import firebase from '../../../firebase';
@@ -9,14 +8,17 @@ import firebase from '../../../firebase';
 class PickContent extends React.Component {
 
 	constructor(props) {
+
 		super(props);
 		this.pickcontent = this.pickcontent.bind(this);
 		var contentImage = window.localStorage.getItem('contentImage')
 		var imageSet = true;
+
 		if(contentImage === undefined){
 			contentImage = "https://dummyimage.com/800x800/ccc/fff.png";
 			imageSet = false;
 		}
+
 		this.state = {
 			contentImage : contentImage,
 			imageSet:imageSet
@@ -24,29 +26,31 @@ class PickContent extends React.Component {
 	}
 
 	pickcontent(image){
+
 		this.setState({
 			contentImage : image,
 			imageSet:true
 		})
+
 		window.localStorage.setItem('contentImage', image);
 	}
 
 	render() {
 		return (
 			<div>
+
 				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>
 				<div className="container createPage">
-					<h1 className="display-4">Style Creator</h1>
+
 					<div className="contentPicker wow slideInRight" ref="contentPicker">
-						<p className="lead">
-							Upload the image you want to style.
-						</p>
+
+						<h1 className="title">Select or upload the picture you want to print.</h1>
 						<div className="row selectbox">
 							<div className="col-md">
 								<ul className="nav nav-tabs" role="tablist">
 
 								<li className="nav-item">
-									<a className="nav-link active" data-toggle="tab" href="#profile" role="tab">Search image</a>
+									<a className="nav-link active" data-toggle="tab" href="#profile" role="tab">Search picture</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link " data-toggle="tab" href="#home" role="tab">Upload picture</a>
@@ -62,20 +66,21 @@ class PickContent extends React.Component {
 								</div>
 							</div>
 							<div className="col-md">
-								<p className="font-weight-bold">Selected Main image:</p>
+								<p className="font-weight-bold">Selected picture:</p>
 								<ImageThumbnail imagefile={this.state.contentImage}></ImageThumbnail>
 							</div>
 						</div>
+
+						<div className="row">
+							<div className="btn btn-group mx-auto" role="group" aria-label="Basic example">
+								<Link to="/create/pickstyle" type="button" className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Pick Style image <span className="oi oi-chevron-right"></span></Link>
+							</div>
+						</div>
+
 					</div>
 
-					<div className="row float-right">
-						<div className="btn-group " role="group" aria-label="Basic example">
-							<Link to="/create/pickstyle"  type="button" className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Pick Style image <span className="oi oi-chevron-right"></span></Link>
-						</div>
-					</div>
 				</div>
 
-				<Footer />
 			</div>
 		);
 	}

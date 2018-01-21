@@ -14,6 +14,7 @@ const  urls = {
 };
 
 const Carousel = (props) => {
+
 	if (props.imagesLoaded) {
 		return (
 			<div class="row">
@@ -79,12 +80,14 @@ const Carousel = (props) => {
 }
 
 class Modal extends React.Component {
+
 	constructor(props){
 		super(props);
 		this.setDataToFireBase = this.setDataToFireBase.bind(this);
 	}
 
 	setDataToFireBase() {
+
 		let item = {
 			previewExtras: this.props.data.previewExtras,
 			designUrl: this.props.data.designUrl,
@@ -103,45 +106,47 @@ class Modal extends React.Component {
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
 	}
+
 	render(){
 		return (
-		<div>
-			<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog" role="document">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title">Save new Style</h5>
-							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div className="modal-body">
-							<p>Please enter the name and description of your Style</p>
-							<form>
-								<div className="form-group">
-									<input type="text" ref="name" className="form-control" id="styleName" required placeholder="Name"></input>
-								</div>
-								<div className="form-group">
-									<input type="textarea" ref="desc" className="form-control" id="styleDescription" required placeholder="Tell us something about your creation..."></input>
-								</div>
-							</form>
-						</div>
-						<div className="modal-footer">
-							<Link to="/" type="button" onClick={this.setDataToFireBase} className="btn btn-primary">Save changes</Link>
-							<button type="submit" className="btn btn-secondary" data-dismiss="modal">Close</button>
+			<div>
+				<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog" role="document">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h5 className="modal-title">Save new style</h5>
+								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div className="modal-body">
+								<p>Please enter the name and description of your Style</p>
+								<form>
+									<div className="form-group">
+										<input type="text" ref="name" className="form-control" id="styleName" required placeholder="Name"></input>
+									</div>
+									<div className="form-group">
+										<input type="textarea" ref="desc" className="form-control" id="styleDescription" required placeholder="Tell us something about your creation..."></input>
+									</div>
+								</form>
+							</div>
+							<div className="modal-footer">
+								<Link to="/" type="button" onClick={this.setDataToFireBase} className="btn btn-primary">Save changes</Link>
+								<button type="submit" className="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	)
+		)
 	}
 }
 
 class PreviewPage extends React.Component {
-	constructor(props) {
-		super(props);
 
+	constructor(props) {
+
+		super(props);
 		this.state = {
 			contentImage: "",
 			styleImage: "",
@@ -154,9 +159,9 @@ class PreviewPage extends React.Component {
 	}
 
 	loadTeeShirts() {
+
 		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
 		let api_url = "https://api.printful.com/mockup-generator/task?task_key=" + this.state.taskid;
-
 		let comp = this;
 
 		$.ajax({
@@ -166,9 +171,11 @@ class PreviewPage extends React.Component {
 			    "Authorization": "Basic " + btoa(api_key),
 			},
 			success: function(data) {
+
 				if (data.code === 200) {
+
 					if (data.result.status === "completed") {
-						console.log(data);
+
 						comp.setState({
 							previewImage: data.result.mockups[0].mockup_url,
 						});
@@ -227,10 +234,13 @@ class PreviewPage extends React.Component {
 			    "Authorization": "Basic " + btoa(api_key),
 			},
 			success: function(data) {
+
 				if (data.code === 200) {
+
 					comp.setState({
 						taskid: data.result.task_key,
 					});
+
 					window.setTimeout(comp.loadTeeShirts(), 150);
 				}
 			},
@@ -241,11 +251,14 @@ class PreviewPage extends React.Component {
 	}
 
 	componentDidMount() {
+
 		let content = window.localStorage.getItem('contentImage');
 		let style = window.localStorage.getItem('styleImage');
 
 		if (content && style) {
+
 			console.log(content, style)
+
 			this.setState({
 				contentImage: content,
 				styleImage: style,
@@ -253,7 +266,6 @@ class PreviewPage extends React.Component {
 
 			// API call to ML
 			let api_url = "http://35.197.98.218:8080/fast-style-transfer";
-
 			let s = '', t = 5000;
 
 			for (let k in urls) {
@@ -269,27 +281,27 @@ class PreviewPage extends React.Component {
 			let comp = this;
 
 			$.ajax({
-		    type: 'POST',
-		    url: api_url,
-		    data: {
-		    	"content": content,
-		    	"style": style,
-		    	"checkpoint": s,
-		    	"num_iterations": 700,
-		    	"maxsize": 1500,
-		    },
-		    timeout: t,
-		    success: function(data) {
-		  		console.log("got it:", data.result_url);
+				type: 'POST',
+				url: api_url,
+				data: {
+					"content": content,
+					"style": style,
+					"checkpoint": s,
+					"num_iterations": 700,
+					"maxsize": 1500,
+				},
+				timeout: t,
+				success: function(data) {
+					console.log("got it:", data.result_url);
 					comp.setState({
 						designUrl: data.result_url,
-			  	});
-			  	comp.requestTeeShirts();
-		    },
-		    error: function(error) {
-		    	console.log(error);
-		    }
-		  });
+					});
+					comp.requestTeeShirts();
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
 		}
 	}
 
@@ -298,21 +310,24 @@ class PreviewPage extends React.Component {
 			<div>
 				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>
 				<div className="container createPage">
-					<h1 className="display-4">Design preview</h1>
-					<Carousel imagesLoaded={this.state.imagesLoaded} previewImage={this.state.previewImage} previewExtras={this.state.previewExtras} />
-					<div className="btns row float-right">
-						<div className="btn-group" role="group" aria-label="Basic example">
-							<Link to="/create/pickcontent" type="button" className={"btn btn-danger "} ><span classNames="oi oi-chevron-left"></span> Generate Design</Link>
-							<button type="button" className={"btn " + (this.state.imagesLoaded ? 'btn-success' :  'btn-secondary disabled')} data-toggle="modal" data-target="#exampleModal"> Save design </button>
-						</div>
 
+					<h1 className="title">Your personal design is ready!</h1>
+
+					<Carousel imagesLoaded={this.state.imagesLoaded} previewImage={this.state.previewImage} previewExtras={this.state.previewExtras} />
+
+					<div className="btns row">
+						<div className="btn btn-group mx-auto" role="group" aria-label="Basic example">
+							<Link to="#" type="button" className={"btn " + (this.state.imagesLoaded ? 'btn-success' : 'btn-secondary disabled')} data-toggle="modal" data-target="#exampleModal">Save design</Link>
+							<Link to="/create/pickcontent" type="button" className="btn btn-danger btn-block">Create new design</Link>
+						</div>
 					</div>
+
 					<Modal data={this.state}></Modal>
+
 				</div>
 			</div>
 		);
 	}
 }
-
 
 export default PreviewPage;

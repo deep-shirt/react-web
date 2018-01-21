@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
 import firebase from '../../firebase';
 import './DetailPage.css'
 
