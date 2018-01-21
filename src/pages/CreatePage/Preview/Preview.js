@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Link } from '../../../components/Navbar/Navbar';
 import './Preview.css'
 import $ from 'jquery';
-import {db} from '../../../firebase';
+import firebase from '../../../firebase';
 
 const  urls = {
 	"https://raw.githubusercontent.com/lengstrom/fast-style-transfer/master/examples/style/la_muse.jpg": "la_muse",
@@ -58,21 +58,21 @@ const Carousel = (props) => {
 	} else {
 		return (
 			<div className="carousel slide" data-ride="carousel">
-				<div class="carousel-inner">
-					<div class="carousel-item active">
+				<div className="carousel-inner">
+					<div className="carousel-item active">
 						
 			      <div className="spinnerBG">
 							<img src="/Flickr-1s-184px.gif"></img>
 						</div>
 			    </div>
 				</div>
-			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
+			  <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span className="sr-only">Previous</span>
 			  </a>
-			  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
+			  <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span className="sr-only">Next</span>
 			  </a>
 			</div>
 		);
@@ -84,17 +84,25 @@ class Modal extends React.Component {
 		super(props);
 		this.setDataToFireBase = this.setDataToFireBase.bind(this);
 	}
-	setDataToFireBase(){
-		db.ref("products").push({
+
+	setDataToFireBase() {
+		let item = {
 			previewExtras: this.props.data.previewExtras,
 			designUrl: this.props.data.designUrl,
+			previewImage: this.props.data.previewImage,
 			contentImage: this.props.data.contentImage,
 			styleImage: this.props.data.styleImage,
 			price: (Math.random() * 20 + 15).toFixed(2),
 			name:this.refs.name.value,
 			description:this.refs.desc.value,
 			tags:""
-		});
+		}
+
+		console.log("Push", item)
+
+		firebase.db.ref("products").push(item)
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err));
 	}
 	render(){
 		return (
@@ -120,8 +128,8 @@ class Modal extends React.Component {
 							</form>							
 						</div>
 						<div className="modal-footer">
-							<Link to="/" type="button" onClick={this.setDataToFireBase} className={"btn btn-primary "} >Save changes</Link>
-							<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+							<Link to="/" type="button" onClick={this.setDataToFireBase} className="btn btn-primary">Save changes</Link>
+							<button type="submit" className="btn btn-secondary" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
@@ -297,7 +305,7 @@ class PreviewPage extends React.Component {
 			
 					<div className="btns row float-right">	
 						<div className="btn-group" role="group" aria-label="Basic example">
-							<Link to="/create/pickcontent" type="button" className={"btn btn-danger "} ><span class="oi oi-chevron-left"></span> Generate Design</Link>
+							<Link to="/create/pickcontent" type="button" className={"btn btn-danger "} ><span classNames="oi oi-chevron-left"></span> Generate Design</Link>
 							<button type="button" className={"btn " + (this.state.imagesLoaded ? 'btn-success' :  'btn-secondary disabled')} data-toggle="modal" data-target="#exampleModal"> Save design </button>
 						</div>						
 				

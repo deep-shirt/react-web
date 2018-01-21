@@ -25,12 +25,12 @@ const GaleryItem = (props) => {
 	return (
 		<div className="col-12 col-md-6 col-lg-4 col-xl-3">
 			<div className="card wow fadeIn" data-wow-delay="0.2s">
-				<img src={props.url} alt="" className="card-img-top"/>
+				<img src={props.prev} alt="" className="card-img-top"/>
 				<div className="card-body">
-					<h5 className="card-title">{props.title}</h5>
+					<h5 className="card-title">{props.name}</h5>
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
 					<p className="card-text">{props.description}</p>
-					<Link to={props.url} className="card-link">Go to listing</Link>
+					<Link to={props.path} className="card-link">Go to listing</Link>
 					<a href="/cart" className="card-link">Add to cart</a>
 				</div>
 			</div>
@@ -56,15 +56,17 @@ class Galery extends React.Component {
 			let results = snap.val();
 
 			for (let i in results) {
-				itemList.push(
-					<GaleryItem 
-						key={i} 
-						path={"/designs/" + i} 
-						title={results[i].title} 
-						url={results[i].designUrl} 
-						description="lol" 
-						price={results[i].price}  />
-				);
+				if (results[i].name && results[i].previewImage && results[i].previewExtras) {
+					itemList.push(
+						<GaleryItem 
+							key={i} 
+							path={"/designs/" + i} 
+							name={results[i].name} 
+							prev={results[i].previewImage} 
+							description={results[i].description}  
+							price={results[i].price}  />
+					);
+				}
 			}
 
 			comp.setState({

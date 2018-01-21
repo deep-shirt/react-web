@@ -9,9 +9,9 @@ const GaleryItem = (props) => {
 	return (
 		<div className="col-12 col-md-4">
 			<div className="card wow fadeIn">
-				<img src={props.url} alt="" className="card-img-top"/>
+				<img src={props.prev} alt="" className="card-img-top"/>
 				<div className="card-body">
-					<h5 className="card-title">{props.title}</h5>
+					<h5 className="card-title">{props.name}</h5>
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
 					<p className="card-text">{props.description}</p>
 					<Link to={props.path} className="card-link">Go to listing</Link>
@@ -43,8 +43,20 @@ class Galery extends React.Component {
 
 			var designs = designsRaw.val();
 			for(let i in designs) {
-
-				itemList.push(<GaleryItem key={i} path={"/designs/" + i} title={designs[i].title} url={designs[i].designUrl} description="lol" price={designs[i].price} img1={designs[i].previewExtras[0]} img2={designs[i].previewExtras[1]} img3={designs[i].previewExtras[2]} />);
+				if (designs[i].name && designs[i].previewImage && designs[i].previewExtras) {
+					itemList.push(
+						<GaleryItem 
+							key={i} 
+							path={"/designs/" + i} 
+							name={designs[i].name} 
+							prev={designs[i].previewImage} 
+							description={designs[i].description} 
+							price={designs[i].price} 
+							img1={designs[i].previewExtras[0]} 
+							img2={designs[i].previewExtras[1]} 
+							img3={designs[i].previewExtras[2]} />
+					);
+				}
 			}
 
 			component.setState({imgSet: itemList});
