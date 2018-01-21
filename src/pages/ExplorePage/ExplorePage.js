@@ -51,19 +51,19 @@ class Galery extends React.Component {
 	getDesigns() {
 		let comp = this;
 
-		firebase.db.ref('products').limitToLast(50).once('value').then((snap) => {
+		firebase.db.ref('products').once('value').then((snap) => {
 			let itemList = [];
 			let results = snap.val();
 
 			for (let i in results) {
 				if (results[i].name && results[i].previewImage && results[i].previewExtras) {
 					itemList.push(
-						<GaleryItem 
-							key={i} 
-							path={"/designs/" + i} 
-							name={results[i].name} 
-							prev={results[i].previewImage} 
-							description={results[i].description}  
+						<GaleryItem
+							key={i}
+							path={"/designs/" + i}
+							name={results[i].name}
+							prev={results[i].previewImage}
+							description={results[i].description}
 							price={results[i].price}  />
 					);
 				}

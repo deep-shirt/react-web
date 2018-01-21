@@ -204,7 +204,7 @@ class PreviewPage extends React.Component {
 	}
 
 	requestTeeShirts() {
-		let ids = [[257, 8852], [260, 8880]]; // men1, women1, 
+		let ids = [[257, 8852], [260, 8880]]; // men1, women1,
 
 		let g = Math.floor(Math.random() * ids.length);
 
@@ -269,7 +269,7 @@ class PreviewPage extends React.Component {
 			});
 
 			// API call to ML
-			let api_url = "http://35.197.98.218:8080/fast-style-transfer";
+			let api_url = "https://deep.deep-shirt.com:8080/fast-style-transfer";
 			let s = '', t = 5000;
 
 			for (let k in urls) {
@@ -277,7 +277,7 @@ class PreviewPage extends React.Component {
 			}
 
 			if (s === ''){
-				api_url = "http://35.197.98.218:8080/neural-art";
+				api_url = "https://deep.deep-shirt.com:8080/neural-art";
 				s = style;
 				t = 0;
 			}
