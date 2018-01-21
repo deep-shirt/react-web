@@ -60,7 +60,7 @@ const Carousel = (props) => {
 			<div className="carousel slide" data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						
+
 			      <div className="spinnerBG">
 							<img src="/Flickr-1s-184px.gif"></img>
 						</div>
@@ -112,7 +112,7 @@ class Modal extends React.Component {
 								<div className="form-group">
 									<input type="text" ref="name" className="form-control" id="styleName" required placeholder="Name"></input>
 								</div>
-							</form>							
+							</form>
 						</div>
 						<div className="modal-footer">
 							<Link to="/" type="button" onClick={this.setDataToFireBase} className={"btn btn-primary "} >Save changes</Link>
@@ -171,7 +171,7 @@ class PreviewPage extends React.Component {
 							previewExtras: e,
 							imagesLoaded: true,
 						});
-						
+
 					} else {
 						window.setTimeout(comp.loadTeeShirts(), 300);
 					}
@@ -220,8 +220,8 @@ class PreviewPage extends React.Component {
 						taskid: data.result.task_key,
 					});
 					window.setTimeout(comp.loadTeeShirts(), 50);
-					
-					
+
+
 				}
 			},
 			error: function(err) {
@@ -244,8 +244,7 @@ class PreviewPage extends React.Component {
 			// API call to ML
 			let api_url = "http://35.197.98.218:8080/fast-style-transfer";
 
-			let s = '',
-					t = 5000;
+			let s = '', t = 5000;
 
 			for (let k in urls) {
 				if (k === style) s = urls[k];
@@ -283,23 +282,23 @@ class PreviewPage extends React.Component {
 		  });
 		}
 	}
-	
+
 	render() {
 		return (
 			<div>
-				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>		
+				<Navbar menuItems={[["Home", false, "/"], ["Explore", false, "/explore"], ["Create", true, "/create/pickcontent"]]}/>
 				<div className="container createPage">
 					<h1 className="display-4">Design preview</h1>
 					<Carousel imagesLoaded={this.state.imagesLoaded} previewImage={this.state.previewImage} previewExtras={this.state.previewExtras} />
-			
-					<div className="btns row float-right">	
+
+					<div className="btns row float-right">
 						<div class="btn-group" role="group" aria-label="Basic example">
 							<Link to="/create/pickcontent" type="button" className={"btn btn-danger "} ><span class="oi oi-chevron-left"></span> Generate Design</Link>
 							<button type="button" className={"btn " + (this.state.imagesLoaded ? 'btn-success' :  'btn-secondary disabled')} data-toggle="modal" data-target="#exampleModal"> Save design </button>
-						</div>						
-				
+						</div>
+
 					</div>
-					<Modal data={this.state}></Modal>		
+					<Modal data={this.state}></Modal>
 				</div>
 			</div>
 		);
