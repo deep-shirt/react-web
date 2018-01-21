@@ -162,7 +162,7 @@ class PreviewPage extends React.Component {
 	loadTeeShirts() {
 
 		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
-		let api_url = "https://api.printful.com/mockup-generator/task?task_key=" + this.state.taskid;
+		let api_url = "https://deep-shirt.com/printful/task?task_key=" + this.state.taskid;
 		let comp = this;
 
 		$.ajax({
@@ -210,7 +210,7 @@ class PreviewPage extends React.Component {
 		let g = Math.floor(Math.random() * ids.length);
 
 		let api_key = "j5kqg094-uo22-haf4:hiyp-17ctdyx9m5wh";
-		let api_url = "https://api.printful.com/mockup-generator/create-task/" + ids[g][0];
+		let api_url = "https://deep-shirt.com/printful/create-task/" + ids[g][0];
 		let api_body = {
 			"variant_ids": [ids[g][1]],
 			"format": "jpg",
@@ -271,7 +271,7 @@ class PreviewPage extends React.Component {
 
 			// API call to ML
 			let api_url = "https://deep.deep-shirt.com:8080/fast-style-transfer";
-			let s = '', t = 5000;
+			let s = '', t = 0;
 
 			for (let k in urls) {
 				if (k === style) s = urls[k];
@@ -305,6 +305,7 @@ class PreviewPage extends React.Component {
 				},
 				error: function(error) {
 					console.log(error);
+					console.log("error on " + api_url)
 				}
 			});
 		}

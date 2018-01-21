@@ -25,7 +25,9 @@ const GaleryItem = (props) => {
 	return (
 		<div className="col-12 col-md-6 col-lg-4 col-xl-3">
 			<div className="card wow fadeIn" data-wow-delay="0.2s">
-				<img src={props.prev} alt="" className="card-img-top"/>
+                <Link to={props.path}>
+    				<img src={props.prev} alt="" className="card-img-top"/>
+                </Link>
 				<div className="card-body">
 					<h5 className="card-title">{props.name}</h5>
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
