@@ -2,35 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
-import './HomePage.css'
+import './HomePage.css';
+import firebase from '../../firebase';
 
-const cards = [];
-
-for (let i = 1; i < 4; i++) {
-	cards.push({
-		id: "t_design_" + i,
-		title: "Design " + i,
-		price: (Math.random() * 50).toFixed(2),
-		description: "This is the description text for design " + i + ".",
-		url: "/designs/shirt" + i,
-		imgs: [
-			"/img/shirt" + i + "/img1",
-			"/img/shirt" + i + "/img2",
-			"/img/shirt" + i + "/img3"
-		]
-	});
-}
 
 const GaleryItem = (props) => {
 	return (
 		<div className="col-12 col-md-4">
-			<div className="card wow fadeIn" data-wow-delay={props.index % 3 / 5 + 0.2 + "s"}>
-				<img src="https://dummyimage.com/800x800/000/fff.png" alt="" className="card-img-top"/>
+			<div className="card wow fadeIn">
+				<img src={props.url} alt="" className="card-img-top"/>
 				<div className="card-body">
 					<h5 className="card-title">{props.title}</h5>
 					<h6 className="card-subtitle mb-2 text-muted">$ {props.price}</h6>
 					<p className="card-text">{props.description}</p>
-					<Link to={props.url} className="card-link">Go to listing</Link>
+					<Link to={props.path} className="card-link">Go to listing</Link>
 					<a href="#" className="card-link">Add to cart</a>
 				</div>
 			</div>
@@ -38,17 +23,40 @@ const GaleryItem = (props) => {
 	);
 }
 
-const Galery = () => {
-	const itemList = [];
+class Galery extends React.Component {
 
-	for (let i = 0; i < cards.length; i++) {
-		let card = cards[i];
-		itemList.push(<GaleryItem index={i} key={card.id} title={card.title} url={card.url} price={card.price} img1={card.imgs[0]} img2={card.imgs[1]} img3={card.imgs[2]} />);
+	constructor(props) {
+
+		super(props);
+		this.state = {
+			imgSet: [],
+		};
+		this.getDesigns();
 	}
 
-	return (
-		<div className="row">{itemList}</div>
-	);
+	getDesigns() {
+
+		var component = this;
+
+		firebase.database().ref("products").limitToLast(3).once("value").then(function(designsRaw) {
+
+			const itemList = [];
+
+			var designs = designsRaw.val();
+			for(let i in designs) {
+
+				itemList.push(<GaleryItem key={i} path={"/designs/" + i} title={designs[i].title} url={designs[i].designUrl} description="lol" price={designs[i].price} img1={designs[i].previewExtras[0]} img2={designs[i].previewExtras[1]} img3={designs[i].previewExtras[2]} />);
+			}
+
+			component.setState({imgSet: itemList});
+		});
+	}
+
+	render() {
+		return (
+			<div className="row">{this.state.imgSet}</div>
+		);
+	}
 }
 
 class HomePage extends React.Component {

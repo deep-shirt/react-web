@@ -1,16 +1,16 @@
 import React from 'react';
 import {Navbar,Link} from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
-import './PickContent.css'
-import { fadeIn } from 'react-animations'
+import './PickContent.css';
+import { fadeIn } from 'react-animations';
 import $ from 'jquery';
 import firebase from '../../../firebase';
 
 
-
 class PickContent extends React.Component {
+
 	constructor(props) {
-		super(props);		
+		super(props);
 		this.pickcontent = this.pickcontent.bind(this);
 		var contentImage = window.localStorage.getItem('contentImage')
 		var imageSet = true;
@@ -22,7 +22,8 @@ class PickContent extends React.Component {
 			contentImage : contentImage,
 			imageSet:imageSet
 		}
-	}	
+	}
+
 	pickcontent(image){
 		this.setState({
 			contentImage : image,
@@ -41,10 +42,10 @@ class PickContent extends React.Component {
 						<p className="lead">
 							Upload the image you want to style.
 						</p>
-						<div className="row selectbox">				
+						<div className="row selectbox">
 							<div className="col-md">
 								<ul className="nav nav-tabs" role="tablist">
-								
+
 								<li className="nav-item">
 									<a className="nav-link active" data-toggle="tab" href="#profile" role="tab">Search image</a>
 								</li>
@@ -59,22 +60,22 @@ class PickContent extends React.Component {
 									<div className="tab-pane active" id="profile" role="tabpanel">
 										<FlickerPicker callback={this.pickcontent}></FlickerPicker>
 									</div>
-								</div>		
-							</div>	
+								</div>
+							</div>
 							<div className="col-md">
 								<p class="font-weight-bold">Selected Main image:</p>
 								<ImageThumbnail imagefile={this.state.contentImage}></ImageThumbnail>
 							</div>
 						</div>
 					</div>
-										
-					<div className="row float-right">	
+
+					<div className="row float-right">
 						<div class="btn-group " role="group" aria-label="Basic example">
 							<Link to="/create/pickstyle"  type="button" className={"btn btn-success " + (this.state.imageSet ? '' : 'disabled')}>Pick Style image <span class="oi oi-chevron-right"></span></Link>
-						</div>	
+						</div>
 					</div>
-				</div>		
-				
+				</div>
+
 				<Footer />
 			</div>
 		);
@@ -104,7 +105,6 @@ const Galery = (props) => {
 		<div className="row galery">{itemList}</div>
 	);
 }
-
 
 class FlickerPicker extends React.Component {
 	constructor(props) {
@@ -149,7 +149,7 @@ class FlickerPicker extends React.Component {
 		return (
 			<div>
 				<div className="input-group mb-3">
-  				
+
   				<input type="text" ref="search" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"></input>
 				  <div className="input-group-append">
     				<button onClick={this.search} className="btn btn-outline-secondary" type="button">Search</button>
@@ -161,8 +161,6 @@ class FlickerPicker extends React.Component {
 	}
 }
 
-
-
 class ImageUpload extends React.Component {
 	constructor(props) {
 		super(props)
@@ -170,7 +168,7 @@ class ImageUpload extends React.Component {
 	}
 	uploadFile(file,cb){
 		var storageRef = firebase.storage().ref();
-		
+
 		var ref = storageRef.child('uploaded/content/'+file.name);
 		ref.put(file).then(function(snapshot) {
 			var url = snapshot.downloadURL;
@@ -179,16 +177,16 @@ class ImageUpload extends React.Component {
 		// Initialize Firebase
 	}
 	pickfile(e) {
-		var files =e.target.files; 
+		var files =e.target.files;
 		if(files.length > 0){
-			this.uploadFile(files[0],this.props.callback)			
+			this.uploadFile(files[0],this.props.callback)
 		}
 	}
 	render() {
 		return (
 			<div>
 				<form>
-					<div className="form-group">					
+					<div className="form-group">
 						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
 					</div>
 				</form>
@@ -196,7 +194,6 @@ class ImageUpload extends React.Component {
 		)
 	}
 }
-
 
 function ImageThumbnail(props) {
 	if (props.imagefile != undefined){
@@ -210,6 +207,5 @@ function ImageThumbnail(props) {
 	}
 	else return (<div></div>);
 }
-
 
 export default PickContent;
