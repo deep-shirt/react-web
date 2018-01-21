@@ -36,12 +36,18 @@
 .createPage .hide {
   display: none; }
 
+<<<<<<< HEAD
 .createPage .col-sm {
   width: 420px; }
 
 .createPage .galery {
   height: 370px;
   overflow-y: overlay; }
+=======
+.createPage .galery {
+  height: 370px;
+  overflow-y: scroll; }
+>>>>>>> auth2
 
 .createPage .galery .card-img-top:hover {
   box-shadow: 0px 0px 6px 1px #323a7f; }
