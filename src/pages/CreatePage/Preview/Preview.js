@@ -17,8 +17,8 @@ const Carousel = (props) => {
 
 	if (props.imagesLoaded) {
 		return (
-			<div class="row">
-				<div class="col align-self-center">
+			<div className="row">
+				<div className="col align-self-center">
 					<div id="preview-carousel" className="carousel slide" data-ride="carousel">
 						<ol className="carousel-indicators">
 							<li data-target="#preview-carousel" data-slide-to="0" className="active"></li>
@@ -27,30 +27,30 @@ const Carousel = (props) => {
 							<li data-target="#preview-carousel" data-slide-to="3"></li>
 							<li data-target="#preview-carousel" data-slide-to="4"></li>
 						</ol>
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img class="d-block image" src={props.previewImage} alt="Close-up style" />
+						<div className="carousel-inner">
+							<div className="carousel-item active">
+								<img className="d-block image" src={props.previewImage} alt="Close-up style" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[0]} alt="Human wearing your style, 1" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[0]} alt="Human wearing your style, 1" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[1]} alt="Human wearing your style, 2" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[1]} alt="Human wearing your style, 2" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[2]} alt="Human wearing your style, 3" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[2]} alt="Human wearing your style, 3" />
 							</div>
-							<div class="carousel-item">
-								<img class="d-block image" src={props.previewExtras[3]} alt="Fith slide" />
+							<div className="carousel-item">
+								<img className="d-block image" src={props.previewExtras[3]} alt="Fith slide" />
 							</div>
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
+						<a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+							<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span className="sr-only">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
+						<a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+							<span className="carousel-control-next-icon" aria-hidden="true"></span>
+							<span className="sr-only">Next</span>
 						</a>
 					</div>
 				</div>

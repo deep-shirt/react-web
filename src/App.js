@@ -15,7 +15,6 @@ import AccountPage from './pages/Account/Account';
 import * as routes from './constants/routes';
 
 
-
 class App extends React.Component {
   render() {
     return (
