@@ -7,7 +7,7 @@ import firebase from '../../firebase';
 
 const GaleryItem = (props) => {
 	return (
-		<div className="col-12 col-md-4">
+		<div className="col-12 col-md-3">
 			<div className="card wow fadeIn">
 				<Link to={props.path}>
                     <img src={props.prev} alt="" className="card-img-top"/>
