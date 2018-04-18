@@ -38,7 +38,7 @@ class Galery extends React.Component {
 
 		var component = this;
 
-		firebase.db.ref("products").limitToLast(6).orderByKey().once("value").then(function(designsRaw) {
+		firebase.db.ref("products").limitToLast(8).orderByKey().once("value").then(function(designsRaw) {
 
 			const itemList = [];
 
