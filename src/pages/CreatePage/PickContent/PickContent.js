@@ -194,6 +194,7 @@ class ImageUpload extends React.Component {
 				<form>
 					<div className="form-group">
 						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
+						<label>By uploading a picture you agree to have the required copyright permissions.</label>
 					</div>
 				</form>
 			</div>
