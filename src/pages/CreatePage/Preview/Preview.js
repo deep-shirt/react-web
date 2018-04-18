@@ -270,7 +270,7 @@ class PreviewPage extends React.Component {
 			});
 
 			// API call to ML
-			let api_url = "https://deep.deep-shirt.com:8080/fast-style-transfer";
+			let api_url = "https://api.deep-shirt.com:8080/fast-style-transfer";
 			let s = '', t = 0;
 
 			for (let k in urls) {
@@ -278,7 +278,7 @@ class PreviewPage extends React.Component {
 			}
 
 			if (s === ''){
-				api_url = "https://deep.deep-shirt.com:8080/neural-art";
+				api_url = "https://api.deep-shirt.com:8080/neural-art";
 				s = style;
 				t = 0;
 			}
