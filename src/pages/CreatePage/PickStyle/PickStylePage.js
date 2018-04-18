@@ -62,9 +62,9 @@ class PickStylePage extends React.Component {
 									<div className="tab-pane active" id="pre-style" role="tabpanel">
 										<Galery callback={this.pickstyle}></Galery>
 									</div>
-									//<div className="tab-pane" id="user-style" role="tabpanel">
-									//	<ImageUpload callback={this.pickstyle}></ImageUpload>
-									//</div>
+									<div className="tab-pane" id="user-style" role="tabpanel">
+										<ImageUpload callback={this.pickstyle}></ImageUpload>
+									</div>
 								</div>
 							</div>
 
@@ -118,12 +118,24 @@ class ImageUpload extends React.Component {
 			<div>
 				<form>
 					<div className="form-group">
-						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
+						<label>Uploading your own pictures is currently not enabled. Sorry 😐</label>
 					</div>
 				</form>
 			</div>
 		)
 	}
+	
+	/*render() {
+		return (
+			<div>
+				<form>
+					<div className="form-group">
+						<input  accept=".jpg" type="file" onChange={this.pickfile} className="form-control-file"></input>
+					</div>
+				</form>
+			</div>
+		)
+	}*/
 }
 
 
